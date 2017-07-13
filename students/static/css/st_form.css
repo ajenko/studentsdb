@@ -1,0 +1,25 @@
+h2  {
+	font-weight: bold;
+	border-bottom: 1px solid #dddddd;
+	padding-left: 60px;
+	
+}
+#main {
+	align-self: center;
+}
+
+#niz {
+	padding-top: 20px;
+}
+
+#buttons {
+	align-self: center;
+	padding-left: 220px;
+	padding-top: 20px;
+}
+
+#whiteBtn {
+	margin-left: 20px;
+	font-weight: bold;
+	color: #419af4;
+}
