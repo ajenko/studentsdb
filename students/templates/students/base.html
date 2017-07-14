@@ -10,7 +10,7 @@
     <!-- Include Styles -->
 
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">  
-   <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+   <link rel="stylesheet" type="text/css" href="{{ PORTAL_URL }}{% static "css/main.css" %}">
 
    {% block extra_css %}{% endblock extra_css %}
 
@@ -47,10 +47,13 @@
   		<!-- Start Subheader -->
   		<div class="row" id="sub-header">
   			<div class="col-xs-12">
-  			  <ul class="nav nav-tabs" role="tablist">
- 			    <li role="presentation" class="active"><a href=""{% url "home" %}">Студенти</a></li>
-  			    <li role="presentation"><a href="/journal">Відвідування</a></li>
-  			    <li role="presentation"><a href="{% url "groups" %}">Групи</a></li>
+          <ul class="nav nav-tabs" role="tablist">
+         {% url "home" as home_url %}
+          <li role="presentation" {% if request.path == home_url %}class="active"{% endif %}><a href="{{ home_url }}">Студенти</a></li>
+         <!-- {% url "journal" as journal_url %} -->
+          <li role="presentation" {% if "/journal" in request.path %}class="active"{% endif %}><a href="/journal">Відвідування</a></li>
+          {% url "groups" as groups_url %}
+          <li role="presentation" {% if groups_url in request.path %}class="active"{% endif %}><a href="{{ groups_url }}">Групи</a></li>
              </ul>
   			</div>
   		</div> 
