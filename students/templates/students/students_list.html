@@ -1,71 +1,13 @@
+{% extends "students/base.html" %}
+
 {% load static from staticfiles %}
-<!DOCTYPE html>
-<html lang="uk">
 
-  <head>
-	<meta charset="utf-8">
-	<title>Сервіс Обліку Студентів</title>
-	<meta name="description" value="Система Обліку Студентів Навчального Закладу">	
-    
-    <!-- Include Styles -->
+{% block meta_title %}Студенти{% endblock meta_title %}
 
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">  
-   <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+{% block title %}База студентів{% endblock title %}
 
 
-  </head>
-
-  <body>
-  	
-  	<!-- Start Container -->
-  	<div class="container">
-  		
-  		<!-- Start Header -->
-  		<div class="row" id="header">
-  			
-  			<!-- Logo -->
-  			<div class="col-xs-8">
-  			  <h1>Сервіс Обліку Студентів</h1>	
-  			</div>
-
-  			<!-- Groups Selectors -->
-  			<div class="col-xs-4" id="group-selector">
-  			  <strong>Група:</strong>
-  			  <select>
-  			  	<option value=''''>Усі Студенти</option>
-  			  	<option value=''''>МмМ - 21, Кобрик Андрій (№2123)</option>
-  			  	<option value=''''>МмМ - 22, Спілберг Міла (№2221)</option>
-  			  	<option value=''''>МмМ - 23, Шварц Арнольд (№221)</option>
-  			  </select>
-  			  
-  			</div>
-  		</div>
-  		<!-- End Header -->
-
-  		<!-- Start Subheader -->
-  		<div class="row" id="sub-header">
-  			<div class="col-xs-12">
-  			  <ul class="nav nav-tabs" role="tablist">
- 			    <li role="presentation" class="active"><a href=""{% url "home" %}">Студенти</a></li>
-  			    <li role="presentation"><a href="/journal">Відвідування</a></li>
-  			    <li role="presentation"><a href="{% url "groups" %}">Групи</a></li>
-             </ul>
-  			</div>
-  		</div> 
-  	    <!-- End SubHeader -->
-
-  	    <!-- Start Main Page Content --> 
-
-  	    <!-- Status Message -->
-  	    <div class="row" id="content-columns">
-  	    <div class="alert alert-warning" role="alert">Зміни скасовано</div>
-
-	     <!-- Logo-->
-  	    
-  	      <div class="col-xs-12" id="content-column">
-  	      <h2>База Студентів</h2>
-  	      
-  	    <!-- Add Students Button -->
+{% block content %}
   	    <a class="btn btn-primary" href="{% url "students_add" %}">Додати Студента</a>
 
   	    <!-- Start Students Listing -->
@@ -108,63 +50,7 @@
   	            </div>
   	            </td>
   	        </tr>
-<!--
-  	        <tr>
-  	          <td>{{ forloop.counter }}</td>
-  	          <td><img height="30" width="30" src="{% static student.image %}" class="img-circle"></td>
-  	          <td><a title="Редагувати" href="{% url "students_edit" student.id %}">{{ student.last_name }}</a></td>
-  	          <td><a title="Редагувати" href="{% url "students_edit" student.id %}">{{ student.first_name }}</a></td>
-  	          <td>2221</td>
-  	          <td>
-  	            <div class="dropdown">
-  	            <button class="btn btn-default dropdown-toggle" 
-  	            type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Дія
-  	            <span class="caret"></span>
-  	            </button>
-  	            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-  	              <li role="presentation">
-  	              	<a role="menuitem" href="{% url "students_edit" student.id %}">Редагувати</a>
-  	              </li>
-  	              <li role="presentation">
-  	              	<a role="menuitem" href="{% url "students_edit" student.id %}">Відвідування</a>
-  	              </li>
-  	              <li role="presentation">
-  	              	<a role="menuitem" tabindex="-1" href="{% url "students_delete" student.id %}">Видалити</a>
-  	              </li>
-  	              </ul>
-  	            </div>
-  	            </td>
-  	        </tr>
 
-
-  	        <tr>
-  	          <td>{{ forloop.counter }}</td>
-  	          <td><img height="30" width="30" src="{% static student.image %}" class="img-circle"></td>
-  	          <td><a title="Редагувати" href="{% url "students_edit" student.id %}">{{ student.last_name }}</a></td>
-  	          <td><a title="Редагувати" href="{% url "students_edit" student.id %}">{{ student.first_name }}</a></td>
-  	          <td>{{ student.ticket }}</td>
-  	          <td>
-  	            <div class="dropdown">
-  	            <button class="btn btn-default dropdown-toggle" 
-  	            type="button" id="dropdownMenu1" data-toggle="dropdown" 
-  	            aria-haspopup="true" aria-expanded="true">Дія
-  	            <span class="caret"></span>
-  	            </button>
-  	            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-  	              <li role="presentation">
-  	              	<a role="menuitem" href="{% url "students_edit" student.id %}">Редагувати</a>
-  	              </li>
-  	              <li role="presentation">
-  	              	<a role="menuitem" href="{% url "students_edit" student.id %}">Відвідування</a>
-  	              </li>
-  	              <li role="presentation">
-  	              	<a role="menuitem" tabindex="-1" href="{% url "students_delete" student.id %}">Видалити</a>
-  	              </li>
-  	              </ul>
-  	            </div>
-  	            </td>
-  	        </tr>
--->
   	      </tbody>
           {% endfor %}
   	    </table>
@@ -182,37 +68,5 @@
         </ul>
         </nav>
   	   
-
+{% endblock content %}
   	    <!-- End Students Listing -->
-
-
-  	      </div>
-  	    
-
-  	    </div>
-  	    <!-- End Main Page Content -->
-
-
-  	    <!-- Start Footer -->
-  	    <div class="row" id="footer">
-  	      <div class="col-xs-12">
-  	       &copy; 2017 Сервіс Обліку Студентів
-  	      </div>
-  	    </div>
-  	    <!-- End Footer -->
-
-  	    </div>
-  	    <!-- End Container -->
-
-
-
-
-  
-	<!-- Javascripts Inclusion -->
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</body>
-  </body>
-
-</html>
