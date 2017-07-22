@@ -1,0 +1,115 @@
+{% extends "students/base.html" %}
+
+{% load static from staticfiles %}
+
+{% block meta_title %}Облік Відвідування{% endblock meta_title %}
+
+{% block title %}Облік відвідування{% endblock title %}
+		 {% block content %}
+     <!-- Navigation -->
+
+     <div class="col-xs-12">
+		 <nav aria-label="Page navigation" >
+          <ul class="pagination" id="navigator">
+         <li>
+              <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&larr;</span>
+              </a>
+         </li>
+              <li><span id="newstyle">Липень</span></li>
+               <li>
+            <a href="#" aria-label="Next">
+            <span aria-hidden="true">&rarr;</span>
+            </a>
+            </li>
+            </ul>
+            </nav>
+
+     </div>
+		 
+
+  	     
+          <!-- Visiting table -->
+
+       <div class="col-xs-12" id="content-column">
+          <table class="table table-hover table-striped">
+            <thead>
+              <th>№</th>
+              <th id= "ft">Студент</th>
+              <th>Сб 1</th>
+              <th>Нд 2</th>
+              <th>Пн 3</th>
+              <th>Вт 4</th>
+              <th>Ср 5</th>
+              <th>Чт 6</th>
+              <th>Пн 7</th>
+              <th>Сб 8</th>
+              <th>Нд 9</th>
+              <th>Пн 10</th>
+              <th>Вт 11</th>
+              <th>Ср 12</th>
+              <th>Чт 13</th>
+              <th>Пт 14</th>
+              <th>Сб 15</th>
+              <th>Нд 16</th>
+              <th>Пн 17</th>
+              <th>Вт 18</th>
+              <th>Ср 19</th>
+              <th>Чт 20</th>
+              <th>Пт 21</th>
+              <th>Сб 22</th>
+              <th>Нд 23</th>
+              <th>Пн 24</th>
+              <th>Вт 25</th>
+              <th>Ср 26</th>
+              <th>Чт 27</th>
+              <th>Пт 28</th>
+              <th>Сб 29</th>
+              <th>Нд 30</th>
+              <th>Пн 31</th>
+            </thead>
+             <tbody>
+             {% for item in journal %}
+               <tr>
+                 <td>{{ forloop.counter }}</td>
+                 <td><a href="{% url "students_edit" item.student.id %}">{{ item.student.name }}</a></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+                 <td><input type="checkbox"></td>
+               </tr>
+               {% endfor %}
+             </tbody>
+  	      </table>
+  	      </div>
+
+          <!-- End visiting table -->
+          {% endblock content %}
+
