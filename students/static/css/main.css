@@ -8,6 +8,14 @@ h1, h2, h3, h4, h5, h6 {
 	margin-top: 10px;
 }
 
+#navigator {
+	padding-left: 500px;
+
+}
+
+
+
+
 #footer {
 	border-top: 1px solid #dddddd;
 	padding-top: 10px;

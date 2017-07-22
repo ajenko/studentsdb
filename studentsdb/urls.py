@@ -30,6 +30,9 @@ urlpatterns = [
     url(r'^groups/(?P<gid>\d+)/edit/$', groups.groups_edit, name='groups_edit'),
     url(r'^groups/(?P<gid>\d+)/delete/$', groups.groups_delete, name='groups_delete'),
 
+    #Journal urls
+    url(r'^journal/$', journal.journal_dt, name='journal'),
+
 	url(r'^admin/', admin.site.urls),
 
 

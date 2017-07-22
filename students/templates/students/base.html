@@ -50,8 +50,8 @@
           <ul class="nav nav-tabs" role="tablist">
          {% url "home" as home_url %}
           <li role="presentation" {% if request.path == home_url %}class="active"{% endif %}><a href="{{ home_url }}">Студенти</a></li>
-         <!-- {% url "journal" as journal_url %} -->
-          <li role="presentation" {% if "/journal" in request.path %}class="active"{% endif %}><a href="/journal">Відвідування</a></li>
+         {% url "journal" as journal_url %}
+          <li role="presentation" {% if journal_url in request.path %}class="active"{% endif %}><a href={{ journal_url }}>Відвідування</a></li>
           {% url "groups" as groups_url %}
           <li role="presentation" {% if groups_url in request.path %}class="active"{% endif %}><a href="{{ groups_url }}">Групи</a></li>
              </ul>
