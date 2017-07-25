@@ -54,6 +54,10 @@
           <li role="presentation" {% if journal_url in request.path %}class="active"{% endif %}><a href={{ journal_url }}>Відвідування</a></li>
           {% url "groups" as groups_url %}
           <li role="presentation" {% if groups_url in request.path %}class="active"{% endif %}><a href="{{ groups_url }}">Групи</a></li>
+          {% url "exams" as exams_url %}
+          <li role="presentation" {% if exams_url in request.path %}class="active"{% endif %}><a href="{{ exams_url }}">Іспити</a></li>
+          {% url "ratings" as ratings_url %}
+          <li role="presentation" {% if ratings_url in request.path %}class="active"{% endif %}><a href="{{ ratings_url }}">Оцінки</a></li>
              </ul>
   			</div>
   		</div> 

@@ -82,6 +82,82 @@ class Group(models.Model):
 	
 	def __unicode__(self):
 		if self.leader:
-			return u"%s %s" % (self.title, self.leader.first_name, self.leader.last_name)
-		else:
 			return u"%s" % (self.title)
+
+class Exam(models.Model):
+	""" Exam model """
+
+	class Meta(object):
+		verbose_name = u'Іспит'
+		verbose_name_plural = u'Іспити'
+
+	subject = models.CharField(
+		max_length = 256,
+		blank = False,
+		verbose_name = u'Предмет')
+
+	date_time = models.DateTimeField(
+		verbose_name = u'Дата, час',
+		blank = False,
+		)
+
+	teacher = models.CharField(
+		verbose_name = u'Викладач',
+		blank = False,
+		max_length = 256)
+	
+	group = models.OneToOneField('Group',
+		verbose_name = u'Група', 
+		blank = False,
+		null = True	)
+
+	notes = models.TextField(
+		blank = True,
+		verbose_name = u'Додаткові нотатки')
+
+	def __unicode__(self):
+	 	if self.group:
+	 		return u"%s" % (self.subject)
+
+	
+class Rating(models.Model):
+	""" Rating model """
+	
+	class Meta(object):
+		verbose_name = u'Оцінка'
+		verbose_name_plural = u'Оцінки'
+
+	student = models.OneToOneField('Student',
+		max_length = 256,
+		blank = False)
+		#verbose_name = u'Студент')
+	
+	date_time = models.DateTimeField(
+		#verbose_name = u'Дата, час',
+		blank = False) 
+	
+	subject = models.CharField(
+		max_length = 256,
+		blank = False,
+		verbose_name = u'Предмет')
+	
+	teacher = models.CharField(
+		verbose_name = u'Викладач',
+		blank = False,
+		max_length = 256)
+	
+	mark = models.CharField(
+		verbose_name = u'Оцінка',
+		max_length = 3,
+		blank = False)
+
+	notes = models.TextField(
+		blank = True,
+		verbose_name = u'Додаткові нотатки')
+
+	def __unicode__(self):
+	 	if self.mark:
+	 		return u"%s %s" % (self.student, self.subject)
+
+
+		

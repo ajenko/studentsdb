@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.template import RequestContext, loader
+from ..models import Rating
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+# Create your views here.
+
+# Views for Exams
+
+def ratings_list(request):
+	ratings = Rating.objects.all()
+
+	# paginate exams
+	paginator = Paginator(ratings, 3)
+	page = request.GET.get('page')
+	try:
+		ratings = paginator.page(page)
+	except PageNotAnInteger:
+		# if page not an integer, deliver first page.
+		ratings = paginator.page(1)
+	except EmptyPage:
+		# if page is out of range (e.g 9999), deliver last page of results
+		ratings = paginator.page(paginator.num_pages)
+
+	return render(request, 'students/ratings_list.html', {'ratings': ratings})
+
+def ratings_add(request):
+	return HttpResponse('<h1>Mark Add Form</h1>')
+
+def ratings_edit(request, sid):
+	return HttpResponse('<h1>Edit Mark %s<h1>' % sid)
+
+def ratings_delete(request, sid):
+	return HttpResponse('<h1>Delete Mark %s</h1>' % sid)

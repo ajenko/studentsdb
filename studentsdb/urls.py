@@ -15,18 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from students.views import students, groups, journal
+from students.views import students, groups, journal, exams, ratings
 from .settings import MEDIA_URL, MEDIA_ROOT, DEBUG
 from django.conf.urls.static import static
 
 urlpatterns = [
-	#Students urls
+	# Students urls
 	url(r'^$', students.students_list, name='home'), 
     url(r'^students/add/$', students.students_add, name='students_add'),
     url(r'^students/(?P<sid>\d+)/edit/$', students.students_edit, name='students_edit'),
     url(r'^students/(?P<sid>\d+)/delete/$', students.students_delete, name='students_delete'),
     
-    #Groups urls
+    # Groups urls
     url(r'^groups/$', groups.groups_list, name='groups'),
     url(r'^groups/add/$', groups.groups_add, name='groups_add'),
     url(r'^groups/(?P<gid>\d+)/edit/$', groups.groups_edit, name='groups_edit'),
@@ -34,6 +34,16 @@ urlpatterns = [
 
     #Journal urls
     url(r'^journal/$', journal.journal_dt, name='journal'),
+
+    # Exams urls
+    url(r'^exams/$', exams.exams_list, name='exams'),
+    url(r'^exams/add/$', exams.exams_add, name='exams_add'),
+    url(r'^exams/(?P<pid>\d+)/edit/$', exams.exams_edit, name='exams_edit'),
+    url(r'^exams/(?P<pid>\d+)/delete/$', exams.exams_delete, name='exams_delete'),
+
+    # Ratings urls
+    url(r'^ratings/$', ratings.ratings_list, name='ratings'),
+    url(r'^ratings/add/$', ratings.ratings_add, name='ratings_add'),
 
 	url(r'^admin/', admin.site.urls),
 ]
