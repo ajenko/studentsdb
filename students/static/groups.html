@@ -72,12 +72,14 @@
   	        </tr>
   	      </thead>
   	      <tbody>
+          {% for group in groups %}
   	       <tr>
-  	          <td>1</td>
-  	          <td><a title="Редагувати" href="#">МтМ-21</a></td>
-  	          <td><a title="Редагувати" href="#">Ячменев Олег</a></td>
+  	          <td>{{ forloop.counter }}</td>
+  	          <td><a title="Редагувати" href="#">{{ group.title }}</a></td>
+  	          <td><a title="Редагувати" href="#">{{ group.leader }}</a></td>
   	          <td>
   	          	<div class="dropdown">
+          }
   				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Дія
                 <span class="caret"></span>
                   </button>
@@ -90,6 +92,7 @@
 				</div>
   	          </td>
   	       </tr>
+           {% endfor %}
   	       <tr>
   	       	<td>2</td>
   	          <td><a title="Редагувати" href="#">МтМ-22</a></td>

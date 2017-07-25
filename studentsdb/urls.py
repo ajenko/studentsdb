@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from students.views import students, groups, journal
+from .settings import MEDIA_URL, MEDIA_ROOT, DEBUG
+from django.conf.urls.static import static
 
 urlpatterns = [
 	#Students urls
@@ -34,6 +36,8 @@ urlpatterns = [
     url(r'^journal/$', journal.journal_dt, name='journal'),
 
 	url(r'^admin/', admin.site.urls),
-
-
 ]
+
+
+if DEBUG:
+    urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
