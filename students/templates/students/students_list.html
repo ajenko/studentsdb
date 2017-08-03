@@ -21,19 +21,15 @@
               
               </a></th>
   	          <th>Фото</th>
-  	          <th><a href="{% url 'home' %}?order_by=last_name{% if order_by == 'last_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
-              Прізвище
-              {% if order_by == 'last_name' and reverse != '1' %}&uarr;              
-              {% elif order_by == 'last_name' and reverse == '1' %}&darr;
-              {% endif %}
+  	          <th>
+              <a href="{% url 'home' %}?order_by=last_name{% if order_by == 'last_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
+              Прізвище{% if order_by == 'last_name' and reverse != '1' %}&uarr;{% elif order_by == 'last_name' and reverse == '1' %}&darr;{% endif %}
              
          
               </a></th>
   	          <th>
-              <a href="{% url 'home' %}?order_by=first_name{% if order_by == 'first_name' and reverse != '1' %}&amp;reverse=1{% endif %}"p>
-              Ім'я
-              {% if order_by == 'first_name' and reverse != '1' %}&uarr;
-              {% elif order_by == 'first_name' and reverse == '1' %}&darr;
+              <a href="{% url 'home' %}?order_by=first_name{% if order_by == 'first_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
+              Ім'я{% if order_by == 'first_name' and reverse != '1' %}&uarr;{% elif order_by == 'first_name' and reverse == '1' %}&darr;
               {% endif %}
              
 

@@ -11,6 +11,7 @@ class Student(models.Model):
 	class Meta(object):
 		verbose_name = u"Студент"
 		verbose_name_plural = u"Студенти"
+		ordering = ['last_name']
 
 	first_name = models.CharField(
 		max_length = 256,
@@ -39,7 +40,7 @@ class Student(models.Model):
 		null = True)
 
 	ticket = models.CharField(
-		max_length = 256,
+		max_length = 4,
 		blank = False,
 		verbose_name = u"Білет")
 
@@ -54,7 +55,7 @@ class Student(models.Model):
 		on_delete = models.PROTECT)
 	
 	def __unicode__(self):
-		return u"%s %s" % (self.first_name, self.last_name)
+		return u"%s %s %s" % (self.first_name, self.last_name, self.students_group)
 
 
 
@@ -106,10 +107,10 @@ class Exam(models.Model):
 		blank = False,
 		max_length = 256)
 	
-	group = models.OneToOneField('Group',
+	group = models.ForeignKey('Group',
 		verbose_name = u'Група', 
 		blank = False,
-		null = True	)
+		null = True)
 
 	notes = models.TextField(
 		blank = True,
@@ -117,7 +118,7 @@ class Exam(models.Model):
 
 	def __unicode__(self):
 	 	if self.group:
-	 		return u"%s" % (self.subject)
+	 		return u"%s %s" % (self.subject, self.group)
 
 	
 class Rating(models.Model):
@@ -127,13 +128,13 @@ class Rating(models.Model):
 		verbose_name = u'Оцінка'
 		verbose_name_plural = u'Оцінки'
 
-	student = models.OneToOneField('Student',
+	student = models.ForeignKey('Student',
 		max_length = 256,
 		blank = False)
 		#verbose_name = u'Студент')
 	
 	date_time = models.DateTimeField(
-		#verbose_name = u'Дата, час',
+		verbose_name = u'Дата, час',
 		blank = False) 
 	
 	subject = models.CharField(

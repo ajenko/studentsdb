@@ -12,8 +12,17 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def groups_list(request):
 	groups = Group.objects.all()
 
+
+	# try to order groups list 
+	order_by = request.GET.get('order_by', '')
+	if order_by in ('title', 'leader'):
+		groups = groups.order_by(order_by)
+		if request.GET.get('reverse', '') == '1':
+			groups = groups.reverse()
+
+
 	# paginate groups
-	paginator = Paginator(groups, 3)
+	paginator = Paginator(groups, 4)
 	page = request.GET.get('page')
 	try:
 		groups = paginator.page(page)

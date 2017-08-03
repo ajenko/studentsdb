@@ -13,8 +13,16 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def ratings_list(request):
 	ratings = Rating.objects.all()
 
+	# try to order exams list 
+	order_by = request.GET.get('order_by', '')
+	if order_by in ('student', 'date_time', 'subject', 'teacher', 'mark'):
+		ratings = ratings.order_by(order_by)
+		if request.GET.get('reverse', '') == '1':
+			ratings = ratings.reverse()
+
+
 	# paginate exams
-	paginator = Paginator(ratings, 3)
+	paginator = Paginator(ratings, 12)
 	page = request.GET.get('page')
 	try:
 		ratings = paginator.page(page)
