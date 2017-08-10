@@ -15,8 +15,13 @@
   	    <thead>
         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
   	        <tr>
-  	          <th>№
-              </th>
+  	         <th><a href="{% url 'groups' %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">
+              №
+              {% if order_by == 'id' and reverse != '1' %}&uarr;
+              {% elif order_by == 'id' and reverse == '1' %}&darr;
+              {% endif %}
+
+              </a>
   	          <th><a href="{% url 'groups' %}?order_by=title{% if order_by == 'title' and reverse != '1' %}&amp;reverse=1{% endif %}">
               Назва
               {% if order_by == 'title' and reverse != '1' %}&uarr;
@@ -39,7 +44,7 @@
   	      <tbody>
            {% for group in groups %}
   	       <tr>
-  	          <td>{{ forloop.counter }}</td>
+  	          <td>{{ forloop.counter0|add:groups.start_index}}</td>
   	          <td><a title="Редагувати" href="{% url "groups_edit" group.id %}">{{ group.title }}</a></td>
   	          <td><a title="Редагувати" href="{% url "students_edit" group.leader.id %}">{{ group.leader }}</a></td>
   	          <td>

@@ -1,9 +1,4 @@
-h2  {
-	font-weight: bold;
-	border-bottom: 1px solid #dddddd;
-	padding-left: 60px;
-	
-}
+
 #main {
 	align-self: center;
 }
@@ -16,6 +11,7 @@ h2  {
 	align-self: center;
 	padding-left: 220px;
 	padding-top: 20px;
+	margin-bottom: 30px;
 }
 
 #whiteBtn {
@@ -23,3 +19,4 @@ h2  {
 	font-weight: bold;
 	color: #419af4;
 }
+

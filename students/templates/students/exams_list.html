@@ -15,7 +15,11 @@
   	    <thead>
          {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
   	        <tr>
-  	          <th>№</th>
+  	          <th><a href="{% url 'exams' %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">№
+              {% if order_by == 'id' and reverse != '1' %}&uarr;
+              {% elif order_by == 'id' and reverse == '1' %}&darr;
+              {% endif %}
+              </a></th>
   	          <th><a href="{% url 'exams' %}?order_by=subject{% if order_by == 'subject' and reverse != '1' %}&amp;reverse=1{% endif %}">Предмет
               {% if order_by == 'subject' and reverse != '1' %}&uarr;
               {% elif order_by == 'subject' and reverse == '1' %}&darr;
@@ -43,7 +47,7 @@
   	      <tbody>
            {% for exam in exams %}
   	       <tr>
-  	          <td>{{ forloop.counter }}</td>
+  	          <td>{{ forloop.counter0|add:exams.start_index}}</td>
   	          <td><a title="Редагувати" href="#">{{ exam.subject }}</a></td>
   	          <td><a title="Редагувати" href="#">{{ exam.teacher }}</a></td>
               <td><a title="Редагувати" href="#">{{ exam.date_time }}</a></td>

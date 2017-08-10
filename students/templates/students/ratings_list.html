@@ -15,7 +15,12 @@
   	    <thead>
         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
   	        <tr>
-  	          <th>№</th>
+  	          <th><a href="{% url 'ratings' %}?order_by=id{% if order_by == 'student' and reverse != '1' %}&amp;reverse=1{% endif %}">
+              №
+              {% if order_by == 'id' and reverse != '1' %}&uarr;
+              {% elif order_by == 'id' and reverse == '1' %}&darr;
+              {% endif %}
+              </a></th>
   	          <th><a href="{% url 'ratings' %}?order_by=student{% if order_by == 'student' and reverse != '1' %}&amp;reverse=1{% endif %}">Студент
               {% if order_by == 'student' and reverse != '1' %}&uarr;
               {% elif order_by == 'student' and reverse == '1' %}&darr;
@@ -72,25 +77,15 @@
   	      </tbody>
          
   	    </table>
-         {% if ratings.has_other_pages %}
-       {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
-        <nav aria-label="Page navigation">
-      <ul class="pagination">
-        <li><a href="{% url 'ratings' %}?page=1&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&laquo;</a></li>
-        {% for p in ratings.paginator.page_range %}
-        <li {% if ratings.number == p %}class="active"{% endif %}>
-        <a href="{% url 'ratings' %}?page={{ p }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">{{ p }}</a></li>
-        {% endfor %}
-
-        <li><a href="{% url 'ratings' %}?page={{ ratings.paginator.num_pages }}&amp;order_by={{ order_by }}&amp;reverse={{ reverse }}">&raquo;</a></li>
-        </ul>
-        </nav>
-        {% endwith %}
-        {% endif %}
+        
+       <div id="demo"><h2>Let AJAX change this text</h2></div>
+       <button type="button" onclick="loadDoc()">Change Content</button>
+       
+       
       
 
         
-
+       
 
         
        {% endblock content %}

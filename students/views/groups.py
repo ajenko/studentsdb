@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import RequestContext, loader	
-from ..models import Group
+from ..models.groups import Group
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
@@ -15,7 +15,7 @@ def groups_list(request):
 
 	# try to order groups list 
 	order_by = request.GET.get('order_by', '')
-	if order_by in ('title', 'leader'):
+	if order_by in ('id', 'title', 'leader'):
 		groups = groups.order_by(order_by)
 		if request.GET.get('reverse', '') == '1':
 			groups = groups.reverse()
