@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'students',
 
 ]
@@ -100,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'uk-uk'
+LANGUAGE_CODE = 'uk-UK'
 
 TIME_ZONE = 'UTC'
 
@@ -130,3 +131,15 @@ FIXTURE_DIRS = (
 )
 
 
+# email settings
+
+ADMIN_EMAIL = 'admin@studentsdb.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = 'a.kobryk@gmail.com'
+EMAIL_HOST_PASSWORD = '300629uausa1620@'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

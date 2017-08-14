@@ -59,6 +59,8 @@
           <li role="presentation" {% if exams_url in request.path %}class="active"{% endif %}><a href="{{ exams_url }}">Іспити</a></li>
           {% url "ratings" as ratings_url %}
           <li role="presentation" {% if ratings_url in request.path %}class="active"{% endif %}><a href="{{ ratings_url }}">Оцінки</a></li>
+          {% url 'contact_admin' as contact_admin_url %}
+          <li role="presentation" {% if contact_admin_url in request.path %}class="active"{% endif %}><a href="{{ contact_admin_url }}">Контакт</a></li>
              </ul>
   			</div>
   		</div> 
@@ -72,12 +74,7 @@
 
          {% block status_message %}
          {% if request.GET.status_message %}
-       
   	    <div class="alert alert-warning" role="alert">{{ request.GET.status_message }}</div>
-        {% elif errors %}
-        <div class="alert alert-warning" role="alert">
-        Будь ласка, виправте наступні помилки
-        </div>
         {% endif %}
         {% endblock %}
 	     <!-- Logo-->

@@ -16,7 +16,8 @@ Including another URLconf
 from students.views.ratings import ratings_ajax_next_page
 from django.conf.urls import url
 from django.contrib import admin
-from students.views import students, groups, journal, exams, ratings
+from students.views import students, groups, journal, exams, ratings, contact_admin
+from students.views.students import StudentUpdateView, StudentDeleteView
 from .settings import MEDIA_URL, MEDIA_ROOT, DEBUG
 from django.conf.urls.static import static
 
@@ -24,8 +25,8 @@ urlpatterns = [
 	# Students urls
 	url(r'^$', students.students_list, name='home'), 
     url(r'^students/add/$', students.students_add, name='students_add'),
-    url(r'^students/(?P<sid>\d+)/edit/$', students.students_edit, name='students_edit'),
-    url(r'^students/(?P<sid>\d+)/delete/$', students.students_delete, name='students_delete'),
+    url(r'^students/(?P<pk>\d+)/edit/$', StudentUpdateView.as_view(), name='students_edit'),
+    url(r'^students/(?P<pk>\d+)/delete/$', StudentDeleteView.as_view(), name='students_delete'),
     
     # Groups urls
     url(r'^groups/$', groups.groups_list, name='groups'),
@@ -48,6 +49,9 @@ urlpatterns = [
     url(r'ratings/next_page$', ratings.ratings_ajax_next_page, name ='ratings_next_page'),
 
 	url(r'^admin/', admin.site.urls),
+
+    # Contact admin Form
+    url(r'^contact-admin/$', contact_admin.contact_admin, name = 'contact_admin'),
 ]
 
 

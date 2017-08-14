@@ -4,7 +4,18 @@
 
 {% block meta_title %}Додати Студента{% endblock meta_title %}
 {% block title %}Додати Студента{% endblock title %}
-	{% block content %}
+
+
+{% block status_message %}
+  {% if errors %}
+  <div class="alert alert-warning" role="alert">
+    Будь ласка, виправте наступні помилки
+  </div>
+  {% endif %}
+{% endblock status_message %}
+	
+
+  {% block content %}
 		<div class="container" id="main">
 		<form  action="{% url "students_add" %}" method="post" 
     enctype="multipart/form-data" class="form-horizontal" id="niz">
