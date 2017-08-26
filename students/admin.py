@@ -9,6 +9,7 @@ from models.students import Student
 from models.groups import Group
 from models.exams import Exam
 from models.ratings import Rating
+from models.monthjournal import MonthJournal
 
 
 
@@ -20,7 +21,8 @@ class StudentFormAdmin(ModelForm):
 
 		# get group where the current student is a leader 
 		groups = Group.objects.filter(leader = self.instance)
-		if len(groups) > 0 and self.cleaned_data['students_group'] != groups[0]:
+		if len(groups) > 0 and \
+			self.cleaned_data['students_group'] != groups[0]:
 			raise ValidationError(u'Студент є старостою іншої групи', code = 'invalid')
 
 		return self.cleaned_data['students_group']
@@ -49,3 +51,4 @@ admin.site.register(Student, StudentAdmin)
 admin.site.register(Group)
 admin.site.register(Exam)
 admin.site.register(Rating)
+admin.site.register(MonthJournal)
