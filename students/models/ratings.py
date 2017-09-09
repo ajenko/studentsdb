@@ -17,7 +17,8 @@ class Rating(models.Model):
 	
 	date_time = models.DateTimeField(
 		verbose_name = u'Дата, час',
-		blank = False) 
+		blank = False,
+		) 
 	
 	subject = models.CharField(
 		max_length = 256,

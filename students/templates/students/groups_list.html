@@ -7,7 +7,7 @@
 {% block title %}Групи{% endblock title %}
 {% block content %}
   	       <!-- Add Groups Button -->
-  	    <a class="btn btn-primary" href="{% url "groups_add" %}">Додати групу</a>
+  	    <a class="btn btn-primary" href="{% url "groups_add" %}" id="group-add-form-link">Додати групу</a>
 
   	    <!-- Start Groups Listing -->
 
@@ -54,9 +54,9 @@
                   </button>
 
   				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    			<li role="presentation"><a href="{% url "groups_edit" group.id %}">Редагувати</a></li>
+    			<li role="presentation"><a href="{% url "groups_edit" group.id %}" class="group-edit-form-link">Редагувати</a></li>
     			<li>
-    			<a role="menuitem" tabindex="-1" href="{% url "groups_delete" group.id %}">Видалити</a></li>
+    			<a role="menuitem" tabindex="-1" href="{% url "groups_delete" group.id %}" class="group-delete-form-link">Видалити</a></li>
   				</ul>
 				</div>
   	          </td>

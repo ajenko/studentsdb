@@ -7,7 +7,7 @@
 {% block title %}Іспити{% endblock title %}
 {% block content %}
   	       <!-- Add Groups Button -->
-  	    <a class="btn btn-primary" href="{% url "exams_add" %}">Додати іспит</a>
+  	    <a class="btn btn-primary" href="{% url "exams_add" %}" id="exam-add-form-link">Додати іспит</a>
 
   	    <!-- Start Groups Listing -->
 
@@ -59,9 +59,9 @@
                   </button>
 
   				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    			<li role="presentation"><a href="{% url "exams_edit" exam.id %}">Редагувати</a></li>
+    			<li role="presentation"><a href="{% url "exams_edit" exam.id %} " class="exam-edit-form-link">Редагувати</a></li>
     			<li>
-    			<a role="menuitem" tabindex="-1" href="{% url "exams_delete" exam.id %}">Видалити</a></li>
+    			<a role="menuitem" tabindex="-1" href="{% url "exams_delete" exam.id %}" class="exam-delete-form-link">Видалити</a></li>
   				</ul>
 				</div>
   	          </td>

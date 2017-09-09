@@ -7,7 +7,7 @@
 {% block title %}Оцінки{% endblock title %}
 {% block content %}
   	       <!-- Add Groups Button -->
-  	    <a class="btn btn-primary" href="{% url "ratings_add" %}">Додати оцінку</a>
+  	    <a class="btn btn-primary" href="{% url "ratings_add" %}" id="rating-add-form-link">Додати оцінку</a>
 
   	    <!-- Start Groups Listing -->
 
@@ -66,9 +66,9 @@
                   </button>
 
   				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    			<li role="presentation"><a href="#">Редагувати</a></li>
+    			<li role="presentation"><a href="{% url "ratings_edit" rating.id %}" class="rating-edit-form-link">Редагувати</a></li>
     			<li>
-    			<a role="menuitem" tabindex="-1" href="#">Видалити</a></li>
+    			<a role="menuitem" tabindex="-1" href="{% url "ratings_delete" rating.id %}" class="rating-delete-form-link">Видалити</a></li>
   				</ul>
 				</div>
   	          </td>
@@ -77,7 +77,8 @@
   	      </tbody>
          
   	    </table>
-        
+         
+    
        <div id="demo"><h2>Let AJAX change this text</h2></div>
        <button type="button" onclick="loadDoc()">Change Content</button>
        

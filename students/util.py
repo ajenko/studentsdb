@@ -50,11 +50,11 @@ def get_groups(request):
 		groups.append({
 			'id': group.id,
 			'title': group.title,
-			'leader': group.leader and (u'%s %s' % (group.leader.first_name,
-				group.leader.last_name)) or None,
+			'leader': group.leader and (u'%s %s' % (group.leader.first_name, group.leader.last_name)) or None,
 			'selected': cur_group and cur_group.id == group.id and True or False 
 			})
-		return groups
+		
+	return groups
 
 def get_current_group(request):
 	"""Returns a currently selected group or None"""

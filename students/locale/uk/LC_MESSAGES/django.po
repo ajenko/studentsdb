@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-02 14:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: templates/students/base.html:8 templates/students/base.html:35
+#: templates/students/base.html:103
+msgid "Students Accounting Service"
+msgstr "Сервіс Обліку Студентів"
+
+#: templates/students/base.html:9
+msgid "App to manage students database"
+msgstr "Система обліку студентів навчального закладу"
+
+#: templates/students/base.html:40
+msgid "Groups:"
+msgstr "Групи:"
+
+#: templates/students/base.html:42
+msgid "All Students"
+msgstr "Усі студенти"
+
+#: templates/students/base.html:60 templates/students/students_list.html:7
+msgid "Students"
+msgstr "Студенти"
+
+#: templates/students/base.html:62 templates/students/students_list.html:82
+msgid "Journal"
+msgstr "Відвідування"
+
+#: templates/students/base.html:64
+msgid "Groups"
+msgstr "Групи"
+
+#: templates/students/base.html:66
+msgid "Exams"
+msgstr "Іспити"
+
+#: templates/students/base.html:68
+msgid "Marks"
+msgstr "Оцінки"
+
+#: templates/students/base.html:70
+msgid "Contact"
+msgstr "Контакт"
+
+#: templates/students/students_list.html:9
+msgid "Students List"
+msgstr "Список Студентів"
+
+#: templates/students/students_list.html:13
+msgid "Add Student"
+msgstr "Додати студента"
+
+#: templates/students/students_list.html:21
+msgid "#"
+msgstr "№"
+
+#: templates/students/students_list.html:24
+msgid "Photo"
+msgstr "Фото"
+
+#: templates/students/students_list.html:27
+msgid "Last Name"
+msgstr "Прізвище"
+
+#: templates/students/students_list.html:34
+msgid "First Name"
+msgstr "Ім'я"
+
+#: templates/students/students_list.html:41
+msgid "Ticket #"
+msgstr "№ Білету"
+
+#: templates/students/students_list.html:46
+msgid "Actions"
+msgstr "Дії"
+
+#: templates/students/students_list.html:73
+msgid "Action"
+msgstr "Дія"
+
+#: templates/students/students_list.html:79
+msgid "Edit"
+msgstr "Редагувати"
+
+#: templates/students/students_list.html:86
+msgid "Delete"
+msgstr "Видалити"

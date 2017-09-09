@@ -11,18 +11,27 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms import ModelForm, DateField
 from studentsdb import settings
 from datetime import datetime
+from ..util import paginate, get_current_group
 
 from django.views.generic import UpdateView, DeleteView
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit 
 from crispy_forms.bootstrap import FormActions
+import imghdr
 # Create your views here.
 
 # Views for Students
 
 def students_list(request):
-	students = Student.objects.all()
+
+	# check if we need to show only one group of students
+	current_group = get_current_group(request)
+	if current_group:
+		students = Student.objects.filter(students_group=current_group)
+	else:
+		# otherwise show all students
+		students = Student.objects.all()
 
 
 	# try to order students list 
@@ -32,22 +41,11 @@ def students_list(request):
 		if request.GET.get('reverse', '') == '1':
 			students = students.reverse()
 
-	# paginate students
-	paginator = Paginator(students, 12)
-	page = request.GET.get('page')
-	try:
-		students = paginator.page(page)
-	except PageNotAnInteger:
-		# if page not an integer, deliver first page.
-		students = paginator.page(1)
-	except EmptyPage:
-		# if page is out of range (e.g 9999), deliver last page of results
-		students = paginator.page(paginator.num_pages)
-
-
-		#page = request.GET.get('page', '')
+	# apply pagination
+	context = paginate(students, 10, request, {},
+		var_name='students')
 		
-	return render(request, 'students/students_list.html', {'students': students})
+	return render(request, 'students/students_list.html', context)
 
 def students_add(request):
 	
@@ -104,9 +102,14 @@ def students_add(request):
 					data['students_group'] = groups[0]
 
 			photo = request.FILES.get('photo')
+			photo_list = ('png', 'jpeg', 'gif')
 			if photo:
-				data['photo'] = photo
-
+				if imghdr.what(photo) not in photo_list:
+					errors['photo'] = u'Файли повинні мати розширення: jpeg, png, gif'
+				elif len(photo) > 2097152:
+					errors['photo'] = u'Розмір файла не повиннен перевищувати 2мб'
+				else:
+					data['photo'] = photo
 
 			# save student
 			if not errors:
@@ -116,10 +119,10 @@ def students_add(request):
 				# redirect to students list 
 
 				return HttpResponseRedirect(
-					u'%s?status_message=Студента успішно додано!' % reverse('home'))
+					u'%s?status_message=Студента {0} {1} успішно додано!'.format(first_name, last_name) % reverse('home'))
 
 			else:
-				# render from with errors and previous user input 
+				# render form with errors and previous user input 
 				return render(request, 'students/students_add.html',
 					{'groups': Group.objects.all().order_by('title'),
 					'errors': errors})	
@@ -148,7 +151,7 @@ class StudentUpdateForm(ModelForm):
 
 		# set form tag attributes 
 		self.helper.form_action = reverse(
-			'students_edit', kwargs = {'pk': kwargs['instance'].id})
+			'students_edit', kwargs={'pk': kwargs['instance'].id})
 
 		self.helper.form_method = 'POST'
 		self.helper.form_class = 'form-horizontal'
@@ -169,6 +172,7 @@ class StudentUpdateView(UpdateView):
 	model = Student
 	template_name = 'students/students_edit.html'
 	form_class = StudentUpdateForm
+
 
 	def get_success_url(self):
 		return u'%s?status_message=Студента успішно збережено' % reverse('home')

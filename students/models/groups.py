@@ -17,7 +17,7 @@ class Group(models.Model):
 
 	leader = models.OneToOneField('Student',
 		verbose_name = u"Староста",
-		blank = True,
+		blank = False,
 		null = True,
 		on_delete = models.SET_NULL)
 

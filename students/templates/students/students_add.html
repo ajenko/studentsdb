@@ -22,7 +22,7 @@
     {% csrf_token %}
   <div class="form-group {% if errors.first_name %}has-error{% endif %}">
     <label for="first_name" class="col-sm-2 control-label">Ім'я*:</label>
-    <div class="col-xs-3">
+    <div class="col-sm-4">
       <input type="text" value="{{ request.POST.first_name }}" class="form-control" name="first_name" id="first_name" placeholder="Ім'я">
       <span class="help-block">{{ errors.first_name }}</span>
     </div>
@@ -30,21 +30,21 @@
   
   <div class="form-group {% if errors.last_name %}has-error{% endif %}">
     <label for="last_name" class="col-sm-2 control-label">Прізвище*:</label>
-    <div class="col-xs-3">
+    <div class="col-sm-4">
       <input type="text" value="{{ request.POST.last_name }}" class="form-control" name="last_name" id="last_name" placeholder="Прізвище">
       <span class="help-block">{{ errors.last_name }}</span>
     </div>
   </div>
   <div class="form-group {% if errors.middle_name %}has-error{% endif %}">
     <label for="middle_name" class="col-sm-2 control-label">По-батькові:</label>
-    <div class="col-xs-3">
+    <div class="col-sm-4">
       <input type="text" value="{{ request.POST.middle_name }}" class="form-control" name="middle_name" id="middle_name" placeholder="По-батькові">
       <span class="help-block">{{ errors.middle_name }}</span>
     </div>
   </div>
   <div class="form-group {% if errors.birthday %}has-error{% endif %}">
     <label for="birthday" class="col-sm-2 control-label">Дата народження*:</label>
-    <div class="col-xs-3">
+    <div class="col-sm-4">
       <input type="text" value="{{ request.POST.birthday }}" class="form-control" name="birthday" id="birthday" placeholder="рррр-мм-дд" >
       <span class="help-block">{{ errors.birthday }}</span>
     </div>
@@ -59,7 +59,7 @@
 </div>
 <div class="form-group {% if errors.ticket %}has-error{% endif %}">
     <label for="ticket" class="col-sm-2 control-label">Білет*:</label>
-    <div class="col-xs-3">
+    <div class="col-sm-4">
       <input type="text" value="{{ request.POST.ticket }}" name="ticket" id="ticket" value="""" class="form-control" placeholder="№ білету" >
       <span class="help-block">{{ errors.ticket }}</span>
     </div>
@@ -67,7 +67,7 @@
 
 <div class="form-group {% if errors.students_group %}has-error{% endif %}">
     <label for="students_group" class="col-sm-2 control-label">Група*:</label>
-    <div class="col-xs-3">
+    <div class="col-sm-4">
       <select class="form-control" value=value="''" name="students_group" id="students_group" >
         <option value=""  >Виберіть групу</option>
         {% for group in groups %}
@@ -79,7 +79,7 @@
   </div>
   <div class="form-group {% if errors.notes %}has-error{% endif %}">
   <label for="notes" class="col-sm-2 control-label">Додаткові Нотатки:</label>
-  <div class="col-xs-3">
+  <div class="col-sm-4">
    <textarea name="notes" id="notes" class="form-control">{{ request.POST.notes }}</textarea>
    <span class="help-block">{{ errors.notes }}</span>
   	</div>

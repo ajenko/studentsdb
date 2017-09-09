@@ -10,6 +10,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
 from studentsdb.settings import ADMIN_EMAIL
+import logging
 
 
 
@@ -32,12 +33,10 @@ class ContactForm(forms.Form):
 		self.helper.help_text_inline = True
 		self.helper.html5_required = True
 		self.helper.label_class = 'col-sm-2 control-label'
-		self.helper.field_class = 'col-sm-3'
+		self.helper.field_class = 'col-sm-4'
 
 		# form buttons
 		self.helper.add_input(Submit('send_button', u'Надіслати'))
-
-
 
 
 	from_email = forms.EmailField(
@@ -70,7 +69,8 @@ def contact_admin(request):
 				send_mail(subject, message, from_email, [ADMIN_EMAIL])
 			except Exception:
 				message = u'Під час відправки виникла непередбачувана помилка.Спробуйте скористатись даною формою пізніше.'
-
+				logger = loggin.getLogger(__name__)
+				logger.exception(message)
 			else: 
 				message = u'Повідомлення успішно надіслане!'
 

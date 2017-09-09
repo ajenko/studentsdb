@@ -1,0 +1,57 @@
+{% extends "students/base.html" %}
+
+{% load static from staticfiles %}
+
+{% block meta_title %}Додати Групу{% endblock meta_title %}
+{% block title %}Додати Групу{% endblock title %}
+
+
+{% block status_message %}
+  {% if errors %}
+  <div class="alert alert-warning" role="alert">
+    Будь ласка, виправте наступні помилки
+  </div>
+  {% endif %}
+{% endblock status_message %}
+	
+
+  {% block content %}
+		<div class="container" id="main">
+		<form  action="{% url "groups_add" %}" method="post" 
+    enctype="multipart/form-data" class="form-horizontal" id="niz">
+    {% csrf_token %}
+  <div class="form-group {% if errors.title %}has-error{% endif %}">
+    <label for="title" class="col-sm-2 control-label">Назва*:</label>
+    <div class="col-sm-4">
+      <input type="text" value="{{ request.POST.title }}" class="form-control" name="title" id="title" placeholder="Назва">
+      <span class="help-block">{{ errors.title }}</span>
+    </div>
+  </div>
+ 
+<div class="form-group {% if errors.leader %}has-error{% endif %}">
+    <label for="leader" class="col-sm-2 control-label">Староста*:</label>
+    <div class="col-sm-4">
+      <select class="form-control" value=value="''" name="leader" id="leader" >
+        <option value="">Виберіть старосту</option>
+        {% for leader in leaders %}
+        <option value="{{ leader.id }}" {% if leader.id == request.POST.leader|add:0 %}selected="1"{% endif %}">{{ leader }}</option>
+        {% endfor %}
+        <span class="help-block">{{ errors.leader }}</span>
+      </select>
+    </div>
+  </div>
+  <div class="form-group {% if errors.notes %}has-error{% endif %}">
+  <label for="notes" class="col-sm-2 control-label">Додаткові Нотатки:</label>
+  <div class="col-sm-4">
+   <textarea name="notes" id="notes" class="form-control">{{ request.POST.notes }}</textarea>
+   <span class="help-block">{{ errors.notes }}</span>
+  	</div>
+  </div>
+ 
+  <div class="col-xs-12" id="buttons">
+  <button type="submit" class="btn btn-primary" name="add_button">Зберегти</button>
+  <button type="submit" class="btn btn-default" id="whiteBtn" name="cancel_button" >Скасувати</button>
+  </div>
+  </form>
+ </div>
+{% endblock content %}

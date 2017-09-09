@@ -44,11 +44,22 @@ class StudentAdmin(admin.ModelAdmin):
 	def view_on_site(self, obj):
 		return reverse('students_edit', kwargs = {'pk': obj.id})
 
+class GroupAdmin(admin.ModelAdmin):
+	list_display = ['title', 'leader', 'notes']
+	list_display_links = ['title']
+	list_editable = ['leader']
+	ordering = ['title']
+	list_filter = ['leader']
+	list_per_page = 3
+	search_fields = ['title', 'leader', 'notes']
+
+	def view_on_site(self, obj):
+		return reverse('groups_edit', kwargs={'pk':obj.id})
 
 # Register your models here.
 
 admin.site.register(Student, StudentAdmin)
-admin.site.register(Group)
+admin.site.register(Group, GroupAdmin)
 admin.site.register(Exam)
 admin.site.register(Rating)
 admin.site.register(MonthJournal)

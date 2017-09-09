@@ -2,16 +2,33 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext, loader	
 from ..models.exams import Exam
+from ..models.groups import Group
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from ..util import paginate, get_current_group 
+from datetime import datetime
+from django.forms import ModelForm
+
+from django.views.generic import UpdateView, DeleteView
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+from crispy_forms.bootstrap import FormActions
 # Create your views here.
 
 # Views for Exams
 
 def exams_list(request):
-	exams = Exam.objects.all()
+	# check if we need to show only one group in exams
+	current_group = get_current_group(request)
+	if current_group:
+		exams = Exam.objects.filter(group=current_group)
+	else:
+		# otherwise show all exams
+		exams = Exam.objects.all()
 
 	# try to order exams list 
 	order_by = request.GET.get('order_by', '')
@@ -20,24 +37,131 @@ def exams_list(request):
 		if request.GET.get('reverse', '') == '1':
 			exams = exams.reverse()
 
-	# paginate exams
-	paginator = Paginator(exams, 12)
-	page = request.GET.get('page')
-	try:
-		exams = paginator.page(page)
-	except PageNotAnInteger:
-		# if page not an integer, deliver first page.
-		exams = paginator.page(1)
-	except EmptyPage:
-		# if page is out of range (e.g 9999), deliver last page of results
-		exams = paginator.page(paginator.num_pages)
-	return render(request, 'students/exams_list.html', {'exams': exams})
+	# apply pagination
+	context = paginate(exams, 12, request, {},
+		var_name='exams')
+
+	
+	return render(request, 'students/exams_list.html', context)
 
 def exams_add(request):
-	return HttpResponse('<h1>Exam Add Form</h1>')
 
-def exams_edit(request, sid):
-	return HttpResponse('<h1>Edit Exam %s<h1>' % pid)
+	# IT DOESN`T WORK NOW!!!
+	#  was form posted?
+	if request.method == "POST":
+		# was form add button clicked?
+		if request.POST.get('add_button') is not None:
+			# errors collection
+			errors = {}
 
-def exams_delete(request, sid):
-	return HttpResponse('<h1>Delete Exam %s</h1>' % pid)
+			# validate exam data will go here
+			data = {'notes': request.POST.get('notes')}
+
+			# validate user input 
+			subject = request.POST.get('subject', '').strip()
+			if not subject:
+				errors['subject'] = u"Назва предмета є обов'язковою"
+			else:
+				data['subject'] = subject
+		
+			date_time = request.POST.get('date_time', '').strip()
+			if not date_time:
+				errors['date_time'] = u"Дата та час іспиту є обов'язковою"
+			else:
+				try:
+					datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
+				except Exception:
+					errors['date_time'] = u'Введіть коректний формат дати(2017-09-01 12:00:00'
+				else:
+					data['date_time'] = date_time	
+		
+			teacher = request.POST.get('teacher', '').strip()
+			if not teacher:
+				errors['teacher'] = u"Викладач є обов'язковим"
+			else:
+				data['teacher'] = teacher
+
+			group = request.POST.get('group', '').strip()
+			if not group:
+				errors['group'] = u"Оберіть групу для студента"
+			else:
+				groups = Group.objects.filter(pk=group)
+				if len(groups) != 1:
+					errors['group'] = u"Оберіть коректну групу"
+				else:	
+					data['group'] = groups[0]
+
+			# save exam
+			if not errors:
+				exam = Exam(**data)
+				exam.save()
+
+				#redirect to exams list
+				return HttpResponseRedirect(
+					u'%s?status_message=Іспит {0} успішно додано!'.format(subject) % reverse('exams'))
+
+			else:
+				# render form with errors and previous user input
+				return render(request, 'students/exams_add.html',
+					{'groups': Group.objects.all().order_by('title'),
+					'errors': errors})
+
+		elif request.POST.get('cancel_button') is not None:
+			# redirect to home page on cancel button
+			return HttpResponseRedirect(
+				u'%s?status_message=Додавання іспита скасовано!' % reverse('exams'))
+	else:
+		# initial form render
+		return render(request, 'students/exams_add.html',
+			{'groups': Group.objects.all().order_by('title')})
+
+class ExamUpdateForm(ModelForm):
+	class Meta:
+		model = Exam
+		fields = '__all__'
+
+	def __init__(self, *args, **kwargs):
+		super(ExamUpdateForm, self).__init__(*args, **kwargs)
+
+		self.helper = FormHelper(self)
+		# set form tag attributes
+		self.helper.form_action = reverse(
+			'exams_edit', kwargs={'pk': kwargs['instance'].id})
+
+		self.helper.form_method = 'POST' 
+		self.helper.form_class = 'form-horizontal'
+
+		# set form field properties
+		self.helper.help_text_inline = True
+		self.helper.html5_required = True
+		self.helper.label_class = 'col-sm-2 control-label'
+		self.helper.field_class = 'col-sm-4'
+
+		# add buttons
+		self.helper.layout.append(FormActions(
+			Submit('add_button', u'Зберегти', css_class="btn btn-primary"), 
+			Submit('cancel_button', u'Скасувати', css_class="btn btn-link")))
+
+
+class ExamUpdateView(UpdateView):
+	model = Exam
+	template_name = 'students/exams_edit.html'
+	form_class = ExamUpdateForm
+
+	def get_success_url(self):
+		return u'%s?status_message=Іспит успішно додано!' % reverse('exams')
+	
+	def post(self, request, *args, **kwargs):
+		if request.POST.get('cancel_button'):
+			return HttpResponseRedirect(
+				u'%s?status_message=Редагування іспита відмінено' % reverse('exams'))
+		else:
+			return super(ExamUpdateView, self).post(request, *args, **kwargs)
+
+class ExamDeleteView(DeleteView):
+	model = Exam
+	template_name = 'students/exams_confirm_delete.html'
+
+	def get_success_url(self):
+		return u'%s?status_message=Іспит успішно видалено!' % reverse('exams')
+

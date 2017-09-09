@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 
 from ..models.students import Student
 from ..models.monthjournal import MonthJournal
-from ..util import paginate
+from ..util import paginate, get_current_group
 
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
@@ -24,6 +24,7 @@ class JournalView(TemplateView):
 	template_name = 'students/journal.html'
 
 	def get_context_data(self, **kwargs):
+	
 		# get context data from TemlpateView class
 		context = super(JournalView, self).get_context_data(**kwargs)
 
@@ -68,7 +69,11 @@ class JournalView(TemplateView):
 		if kwargs.get('pk'):
 			queryset = [Student.objects.get(pk = kwargs['pk'])]
 		else:
-			queryset = Student.objects.all().order_by('last_name')
+			current_group = get_current_group(self.request)
+			if current_group:
+				queryset = Student.objects.filter(students_group=current_group).order_by('last_name')
+			else:
+				queryset = Student.objects.all().order_by('last_name')
 
 		# url to update student presense, for form post 
 		update_url = reverse('journal')
@@ -121,7 +126,7 @@ class JournalView(TemplateView):
 		# get or create journal object for given student and month 
 		journal = MonthJournal.objects.get_or_create(student = student, date = month)[0]
 
-		# set new presence on journal for given student and save result 
+		# set new presence on journal for given s(**tudent and save result 
 
 		setattr(journal, 'present_day%d' % current_date.day, present)
 		journal.save()
