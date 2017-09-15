@@ -3,9 +3,9 @@
 {% load i18n%}
 {% load static from staticfiles %}
 
-{% block meta_title %}Видалити оцінку{% endblock meta_title %}
+{% block meta_title %}{% trans "Delete Rating" %}{% endblock meta_title %}
 
-{% block title %}Видалити оцінку{% endblock title %}
+{% block title %}{% trans "Delete Rating" %}{% endblock title %}
 
 	
 {% block content %}
@@ -13,8 +13,10 @@
 <form action="{% url 'ratings_delete' object.id %}" method="post">
 {% csrf_token %}
 
-<p>Ви дійсно хочете видалити оцінку "{{ object }}"?</p>
-<input type="submit" value="Так" name="delete_button" class="btn btn-danger"><br><br>
+<p>{% blocktrans %}Do you really want to delete rating: "{{ object }}"?{% endblocktrans %}</p>
+<input type="submit" value="{% trans "Yes" %}" name="delete_button" class="btn btn-danger">
+<a href="{% url "ratings" %}" class="btn btn-info">{% trans "No" %}</a>
+<br><br>
 	
 </form>
     

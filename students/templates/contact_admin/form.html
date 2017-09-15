@@ -1,15 +1,15 @@
 {% extends "students/base.html" %}
-
+{% load i18n %}
 {% load static from staticfiles %}
 {% load crispy_forms_tags %}
 
-{% block meta_title %}Зв'язок із адміністратором{% endblock meta_title %}
-{% block title %}Зв'язок із адміністратором{% endblock title %}
+{% block meta_title %}{% trans "Contact with administration "%}{% endblock meta_title %}
+{% block title %}{% trans "Contact with administration "%}{% endblock title %}
 
 {% block status_message %}
   {% if form.errors %}
   <div class="alert alert-warning" role="alert">
-    Будь ласка, виправте наступні помилки
+ {% trans "Please, correct following mistakes" %}
   </div>
   {% endif %}
   {{ block.super }}

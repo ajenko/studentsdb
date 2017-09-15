@@ -55,7 +55,7 @@ class JournalView(TemplateView):
 		myyear, mmonth = month.year, month.month
 		number_of_days = monthrange(myyear, mmonth)[1]
 		context['month_header'] = [{'day':d,'verbose': 
-				day_abbr[weekday(myyear, mmonth, d)][:2]} 
+				day_abbr[weekday(myyear, mmonth, d)][:3]} 
 				for d in range(1, number_of_days + 1)]
 	
 		# get all students form database, or just one if we need

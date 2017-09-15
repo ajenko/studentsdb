@@ -91,7 +91,7 @@ function initAddGroupPage() {
 			'success': function(data, status, xhr){
 				// check if we got a successfull response from the server
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 
@@ -113,7 +113,7 @@ function initAddGroupPage() {
 				});
 			},
 			'error': function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.')
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -131,7 +131,7 @@ function initEditGroupPage() {
 			'success': function(data, status, xhr){
 				// check if we got a successfull response from the server
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 
@@ -153,7 +153,7 @@ function initEditGroupPage() {
 				});
 			},
 			'error': function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.')
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -171,7 +171,7 @@ function initDeleteGroupPage() {
 			'success': function(data, status, xhr){
 				// check if we got a successfull response from the server
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 
@@ -193,7 +193,7 @@ function initDeleteGroupPage() {
 				});
 			},
 			'error': function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.')
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -214,7 +214,7 @@ function initAddStudentPage() {
 			'success': function(data, status, xhr){
 				// check if we got a successfull response from the server
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 
@@ -236,7 +236,7 @@ function initAddStudentPage() {
 				});
 			},
 			'error': function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.')
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -255,7 +255,7 @@ function initEditStudentPage() {
 			'success': function(data, status, xhr){
 				// check if we`ve got a successfull response form the server
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 				// update modal window with arrived content from the server
@@ -275,7 +275,7 @@ function initEditStudentPage() {
 				});
 			},
 			'error' : function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка пізніше.');
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -293,7 +293,7 @@ function initDeleteStudent() {
 			'success': function(data, status, xhr){
 				// check if we`ve got a successfull response form the server
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 				// update modal window with arrived content from the server
@@ -313,7 +313,7 @@ function initDeleteStudent() {
 				});
 			},
 			'error' : function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка пізніше.');
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -335,7 +335,7 @@ function initForm(form, modal) {
 	form.ajaxForm({
 		'dataType': 'html',
 		'error': function(){
-			alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+			alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 			return false;
 		},
 		'success': function(data, status, xhr) {
@@ -374,7 +374,7 @@ function initAddExam() {
 			'success': function(data, status, xhr){
 				// check if we got successfull response from the server 
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 				// update modal window with arrived content from the server
@@ -396,7 +396,7 @@ function initAddExam() {
 				});
 			},
 			'error': function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.')
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -414,7 +414,7 @@ function initEditExam() {
 			'success': function(data, status, xhr){
 				// check if we got successfull response from the server 
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 				// update modal window with arrived content from the server
@@ -436,7 +436,7 @@ function initEditExam() {
 				});
 			},
 			'error': function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.')
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -454,7 +454,7 @@ function initDeleteExam() {
 			'success': function(data, status, xhr){
 				// check if we got successfull response from the server 
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 				// update modal window with arrived content from the server
@@ -476,7 +476,7 @@ function initDeleteExam() {
 				});
 			},
 			'error': function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.')
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -496,7 +496,7 @@ function initAddRating() {
 			'success': function(data, status, xhr){
 				// check if we got successfull response from the server 
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 				// update modal window with arrived content from the server
@@ -518,7 +518,7 @@ function initAddRating() {
 				});
 			},
 			'error': function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.')
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -536,7 +536,7 @@ function initEditRating() {
 			'success': function(data, status, xhr){
 				// check if we got successfull response from the server 
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 				// update modal window with arrived content from the server
@@ -558,7 +558,7 @@ function initEditRating() {
 				});
 			},
 			'error': function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.')
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -576,7 +576,7 @@ function initDeleteRating() {
 			'success': function(data, status, xhr){
 				// check if we got successfull response from the server 
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 				// update modal window with arrived content from the server
@@ -598,7 +598,7 @@ function initDeleteRating() {
 				});
 			},
 			'error': function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.')
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
@@ -617,7 +617,7 @@ function initContactAdmin() {
 			'success': function(data, status, xhr){
 				// check if we got successfull response from the server 
 				if (status != 'success') {
-					alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.');
+					alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 					return false;
 				}
 				// update modal window with arrived content from the server
@@ -639,14 +639,31 @@ function initContactAdmin() {
 				});
 			},
 			'error': function(){
-				alert('Помилка на сервері. Спробуйте, будь ласка, пізніше.')
+				alert(gettext('There was an error on the server. Please, try againg a bit later.'));
 				return false;
 			}
 		});
 		return false;
 	});
 }
+// Set Language
+// ------------------------------------------------------------------------
 
+
+function setLang(){
+	$('#lang selector select').change(function(event){
+		alert("hi")
+		var language = $(this).val();
+		if (language) {
+			$.cookie('django_language', language, {'path': '/', 'expires': 365});
+		} else {
+			$.removeCookie('django_language', {'path': '/'});
+		}
+		location.reload(true);
+		return true;
+	});
+
+}
 
 
 $(document).ready(function(){
@@ -656,7 +673,7 @@ $(document).ready(function(){
 	initAddStudentPage();
 	initEditStudentPage();
 	initDeleteStudent();
-	//initAddGroupPage();
+	initAddGroupPage();
 	initEditGroupPage();
 	initDeleteGroupPage();
 	initAddExam();
@@ -665,7 +682,10 @@ $(document).ready(function(){
 	initAddRating();
 	initEditRating();
 	initDeleteRating();
-	initContactAdmin();
+	//initContactAdmin();
+
+	//setLang();
+
 
 
 });

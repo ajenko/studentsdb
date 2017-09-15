@@ -63,8 +63,8 @@
 
 
               </td>
-              <td><a title="Редагувати" href="{% url "students_edit" student.id %}" class="student-edit-form-link">{{ student.last_name }}</a></td>
-  	          <td><a title="Редагувати" href="{% url "students_edit" student.id %}" class="student-edit-form-link">{{ student.first_name }}</a></td>
+              <td><a title="{% trans "Edit" %}" href="{% url "students_edit" student.id %}" class="student-edit-form-link">{{ student.last_name }}</a></td>
+  	          <td><a title="{% trans "Edit" %}" href="{% url "students_edit" student.id %}" class="student-edit-form-link">{{ student.first_name }}</a></td>
   	          <td>{{ student.ticket }}</td>
   	          <td>
   	            <div class="dropdown">

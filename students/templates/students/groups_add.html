@@ -1,15 +1,15 @@
 {% extends "students/base.html" %}
-
+{% load i18n %}
 {% load static from staticfiles %}
 
-{% block meta_title %}Додати Групу{% endblock meta_title %}
-{% block title %}Додати Групу{% endblock title %}
+{% block meta_title %}{% trans "Add the Group" %}{% endblock meta_title %}
+{% block title %}{% trans "Add the Group" %}{% endblock title %}
 
 
 {% block status_message %}
   {% if errors %}
   <div class="alert alert-warning" role="alert">
-    Будь ласка, виправте наступні помилки
+   {% trans "Please, correct following mistakes" %}
   </div>
   {% endif %}
 {% endblock status_message %}
@@ -21,18 +21,18 @@
     enctype="multipart/form-data" class="form-horizontal" id="niz">
     {% csrf_token %}
   <div class="form-group {% if errors.title %}has-error{% endif %}">
-    <label for="title" class="col-sm-2 control-label">Назва*:</label>
+    <label for="title" class="col-sm-2 control-label">{% trans "Title*" %}</label>
     <div class="col-sm-4">
-      <input type="text" value="{{ request.POST.title }}" class="form-control" name="title" id="title" placeholder="Назва">
+      <input type="text" value="{{ request.POST.title }}" class="form-control" name="title" id="title" placeholder="{% trans "Title" %}">
       <span class="help-block">{{ errors.title }}</span>
     </div>
   </div>
  
 <div class="form-group {% if errors.leader %}has-error{% endif %}">
-    <label for="leader" class="col-sm-2 control-label">Староста*:</label>
+    <label for="leader" class="col-sm-2 control-label">{% trans "Leader*" %}</label>
     <div class="col-sm-4">
       <select class="form-control" value=value="''" name="leader" id="leader" >
-        <option value="">Виберіть старосту</option>
+        <option value="">{% trans "Choose the leader" %}</option>
         {% for leader in leaders %}
         <option value="{{ leader.id }}" {% if leader.id == request.POST.leader|add:0 %}selected="1"{% endif %}">{{ leader }}</option>
         {% endfor %}
@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="form-group {% if errors.notes %}has-error{% endif %}">
-  <label for="notes" class="col-sm-2 control-label">Додаткові Нотатки:</label>
+  <label for="notes" class="col-sm-2 control-label">{% trans "Notes" %}</label>
   <div class="col-sm-4">
    <textarea name="notes" id="notes" class="form-control">{{ request.POST.notes }}</textarea>
    <span class="help-block">{{ errors.notes }}</span>
@@ -49,8 +49,8 @@
   </div>
  
   <div class="col-xs-12" id="buttons">
-  <button type="submit" class="btn btn-primary" name="add_button">Зберегти</button>
-  <button type="submit" class="btn btn-default" id="whiteBtn" name="cancel_button" >Скасувати</button>
+  <button type="submit" class="btn btn-primary" name="add_button">{% trans "Save" %}</button>
+  <button type="submit" class="btn btn-default" id="whiteBtn" name="cancel_button" >{% trans "Cancel" %}</button>
   </div>
   </form>
  </div>

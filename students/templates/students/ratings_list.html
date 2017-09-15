@@ -1,13 +1,13 @@
 {% extends "students/base.html" %}
-
+{% load i18n %}
 {% load static from staticfiles %}
 
-{% block meta_title %}Оцінки{% endblock meta_title %}
+{% block meta_title %}{% trans "Ratings" %}{% endblock meta_title %}
 
-{% block title %}Оцінки{% endblock title %}
+{% block title %}{% trans "Ratings" %}{% endblock title %}
 {% block content %}
   	       <!-- Add Groups Button -->
-  	    <a class="btn btn-primary" href="{% url "ratings_add" %}" id="rating-add-form-link">Додати оцінку</a>
+  	    <a class="btn btn-primary" href="{% url "ratings_add" %}" id="rating-add-form-link">{% trans "Add Rating" %}</a>
 
   	    <!-- Start Groups Listing -->
 
@@ -15,38 +15,37 @@
   	    <thead>
         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
   	        <tr>
-  	          <th><a href="{% url 'ratings' %}?order_by=id{% if order_by == 'student' and reverse != '1' %}&amp;reverse=1{% endif %}">
-              №
+  	          <th><a href="{% url 'ratings' %}?order_by=id{% if order_by == 'student' and reverse != '1' %}&amp;reverse=1{% endif %}">{% trans "#" %}
               {% if order_by == 'id' and reverse != '1' %}&uarr;
               {% elif order_by == 'id' and reverse == '1' %}&darr;
               {% endif %}
               </a></th>
-  	          <th><a href="{% url 'ratings' %}?order_by=student{% if order_by == 'student' and reverse != '1' %}&amp;reverse=1{% endif %}">Студент
+  	          <th><a href="{% url 'ratings' %}?order_by=student{% if order_by == 'student' and reverse != '1' %}&amp;reverse=1{% endif %}">{% trans "Student" %}
               {% if order_by == 'student' and reverse != '1' %}&uarr;
               {% elif order_by == 'student' and reverse == '1' %}&darr;
               {% endif %}
               </a></th>
-              <th><a href="{% url 'ratings' %}?order_by=date_time{% if order_by == 'date_time' and reverse != '1' %}&amp;reverse=1{% endif %}">Дата, час
+              <th><a href="{% url 'ratings' %}?order_by=date_time{% if order_by == 'date_time' and reverse != '1' %}&amp;reverse=1{% endif %}">{% trans "Date, time" %}
               {% if order_by == 'date_time' and reverse != '1' %}&uarr;
               {% elif order_by == 'date_time' and reverse == '1' %}&darr;
               {% endif %}
               </a></th> 
-              <th><a href="{% url 'ratings' %}?order_by=subject{% if order_by == 'subject' and reverse != '1' %}&amp;reverse=1{% endif %}">Предмет
+              <th><a href="{% url 'ratings' %}?order_by=subject{% if order_by == 'subject' and reverse != '1' %}&amp;reverse=1{% endif %}">{% trans "Subject" %}
               {% if order_by == 'subject' and reverse != '1' %}&uarr;
               {% elif order_by == 'subject' and reverse == '1' %}&darr;
               {% endif %}
               </a></th>
-              <th><a href="{% url 'ratings' %}?order_by=teacher{% if order_by == 'teacher' and reverse != '1' %}&amp;reverse=1{% endif %}">Викладач
+              <th><a href="{% url 'ratings' %}?order_by=teacher{% if order_by == 'teacher' and reverse != '1' %}&amp;reverse=1{% endif %}">{% trans "Teacher" %}
               {% if order_by == 'teacher' and reverse != '1' %}&uarr;
               {% elif order_by == 'teacher' and reverse == '1' %}&darr;
               {% endif %}
               </a></th>
-              <th><a href="{% url 'ratings' %}?order_by=mark{% if order_by == 'mark' and reverse != '1' %}&amp;reverse=1{% endif %}">Оцінка
+              <th><a href="{% url 'ratings' %}?order_by=mark{% if order_by == 'mark' and reverse != '1' %}&amp;reverse=1{% endif %}">{% trans "Rating" %}
               {% if order_by == 'mark' and reverse != '1' %}&uarr;
               {% elif order_by == 'mark' and reverse == '1' %}&darr;
               {% endif %}
               </a></th>        
-  	          <th>Дії</th>
+  	          <th>{% trans "Actions" %}</th>
   	        </tr>
             {% endwith %}
   	      </thead>
@@ -54,21 +53,21 @@
            {% for rating in ratings %}
   	       <tr>
   	          <td>{{ forloop.counter }}</td>
-  	          <td><a title="Редагувати" href="#">{{ rating.student }}</a></td>
-  	          <td><a title="Редагувати" href="#">{{ rating.date_time }}</a></td>
-              <td><a title="Редагувати" href="#">{{ rating.subject }}</a></td>
-              <td><a title="Редагувати" href="#">{{ rating.teacher }}</a></td>
-              <td><a title="Редагувати" href="#">{{ rating.mark }}</a></td>
+  	          <td><a title="{% trans "Edit" %}" href="#">{{ rating.student }}</a></td>
+  	          <td><a title="{% trans "Edit" %}" href="#">{{ rating.date_time }}</a></td>
+              <td><a title="" href="#">{{ rating.subject }}</a></td>
+              <td><a title="" href="#">{{ rating.teacher }}</a></td>
+              <td><a title="{% trans "Edit" %}" href="#">{{ rating.mark }}</a></td>
   	          <td>
   	          	<div class="dropdown">
-  				      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Дія
+  				      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{% trans "Action" %}
                 <span class="caret"></span>
                   </button>
 
   				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    			<li role="presentation"><a href="{% url "ratings_edit" rating.id %}" class="rating-edit-form-link">Редагувати</a></li>
+    			<li role="presentation"><a href="{% url "ratings_edit" rating.id %}" class="rating-edit-form-link">{% trans "Edit" %}</a></li>
     			<li>
-    			<a role="menuitem" tabindex="-1" href="{% url "ratings_delete" rating.id %}" class="rating-delete-form-link">Видалити</a></li>
+    			<a role="menuitem" tabindex="-1" href="{% url "ratings_delete" rating.id %}" class="rating-delete-form-link">{% trans "Delete" %}</a></li>
   				</ul>
 				</div>
   	          </td>

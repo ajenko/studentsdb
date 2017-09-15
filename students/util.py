@@ -1,4 +1,10 @@
+# -*- coding: utf-8 -*-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
+from django.conf import settings
+from django.utils.translation import LANGUAGE_SESSION_KEY
+from studentsdb.settings import LANGUAGE_CODE
+
 
 def paginate(objects, size, request, context, var_name = 'object_list'):
 
@@ -57,12 +63,10 @@ def get_groups(request):
 	return groups
 
 def get_current_group(request):
-	"""Returns a currently selected group or None"""
-	
-	# we remember a selected group in a cookie 
+	""" Returns a currently selected group or None """ 
+	# we remember a selected group in a cookie
 	pk = request.COOKIES.get('current_group')
-
-	if pk: 
+	if pk:
 		from .models.groups import Group
 		try:
 			group = Group.objects.get(pk=int(pk))
@@ -72,3 +76,41 @@ def get_current_group(request):
 			return group
 	else:
 		return None
+
+def choose_lang(request):
+	if request.session[LANGUAGE_SESSION_KEY] == 'uk':
+		lg = u'Українська'
+		return lg
+	elif request.session[LANGUAGE_SESSION_KEY] == 'en':
+		lg = u'English'
+	else:
+		if LANGUAGE_CODE == 'uk':
+			lg = u'Українська'
+		elif LANGUAGE_CODE == 'en':
+			lg = u'English'
+		else:
+			lg = u'Select'
+		return lg 
+
+
+'''
+def choose_lang(request):
+	""" Choose current app language """
+	lang = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME, 'uk-UK')
+	print 'Lang is:' + str(lang)
+	print 'lang is:' + str(settings.LANGUAGE_COOKIE_NAME)
+	response_dict = {'django_lang': ''}
+
+	if lang: 
+		import logging
+		try:
+			response_dict['django_lang'] = settings.LANGUAGE_COOKIE_NAME
+		except Exception as e:
+			logger = logging.getLogger(__name__)
+			logger.exception('Error during setting language. Was tried {0} language'.format(lang))
+		else:
+			logger = logging.getLogger(__name__)
+			logger.info('Was set {0} language.'.format(lang))
+
+	return JsonResponse(response_dict, safe=False)
+	''' 

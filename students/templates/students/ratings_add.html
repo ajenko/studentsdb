@@ -1,15 +1,15 @@
 {% extends "students/base.html" %}
-
+{% load i18n %}
 {% load static from staticfiles %}
 
-{% block meta_title %}Додати Оцінку{% endblock meta_title %}
-{% block title %}Додати Оцінку{% endblock title %}
+{% block meta_title %}{% trans "Add the Rating" %}{% endblock meta_title %}
+{% block title %}{% trans "Add the Rating" %}{% endblock title %}
 
 
 {% block status_message %}
   {% if errors %}
   <div class="alert alert-warning" role="alert">
-    Будь ласка, виправте наступні помилки
+    {% trans "Please, correct following mistakes" %}
   </div>
   {% endif %}
 {% endblock status_message %}
@@ -22,10 +22,10 @@
     {% csrf_token %}
 
   <div class="form-group {% if errors.student %}has-error{% endif %}">
-    <label for="student" class="col-sm-2 control-label">Студент*:</label>
+    <label for="student" class="col-sm-2 control-label">{% trans "Student" %}*</label>
     <div class="col-sm-4">
       <select class="form-control" value=value="''" name="student" id="student" >
-        <option value="">Виберіть студента</option>
+        <option value="">{% trans "Choose the student" %}</option>
         {% for student in students %}
         <option value="{{ student.id }}" {% if student.id == request.POST.student|add:0 %}selected="1"{% endif %}>{{ student }}</option>
         {% endfor %}
@@ -35,38 +35,38 @@
   </div>
 
   <div class="form-group {% if errors.date_time %}has-error{% endif %}">
-    <label for="date_time" class="col-sm-2 control-label">Дата та час*:</label>
+    <label for="date_time" class="col-sm-2 control-label">{% trans "Date, time" %}*</label>
     <div class="col-sm-4">
-      <input type="text" value="{{ request.POST.date_time }}" class="form-control" name="date_time" id="date_time" placeholder="рррр-мм-дд гг-хв-сс" >
+      <input type="text" value="{{ request.POST.date_time }}" class="form-control" name="date_time" id="date_time" placeholder="{% trans "yyyy-mm-dd hh-mm-ss" %}" >
       <span class="help-block">{{ errors.date_time }}</span>
     </div>
   </div>
 
   <div class="form-group {% if errors.subject %}has-error{% endif %}">
-    <label for="subject" class="col-sm-2 control-label">Предмет*:</label>
+    <label for="subject" class="col-sm-2 control-label">{% trans "Subject" %}*</label>
     <div class="col-sm-4">
-      <input type="text" value="{{ request.POST.subject }}" class="form-control" name="subject" id="subject" placeholder="Предмет">
+      <input type="text" value="{{ request.POST.subject }}" class="form-control" name="subject" id="subject" placeholder={% trans "Subject" %}>
       <span class="help-block">{{ errors.subject }}</span>
     </div>
   </div>
 
   <div class="form-group {% if errors.teacher %}has-error{% endif %}">
-    <label for="teacher" class="col-sm-2 control-label">Викладач*:</label>
+    <label for="teacher" class="col-sm-2 control-label">{% trans "Teacher" %}*</label>
     <div class="col-sm-4">
-      <input type="text" value="{{ request.POST.teacher}}" name="teacher" id="teacher" value="" class="form-control" placeholder="Викладач" >
+      <input type="text" value="{{ request.POST.teacher}}" name="teacher" id="teacher" value="" class="form-control" placeholder="{% trans "Teacher" %}" >
       <span class="help-block">{{ errors.teacher }}</span>
     </div>
   </div>
 
   <div class="form-group {% if errors.mark %}has-error{% endif %}">
-    <label for="mark" class="col-sm-2 control-label">Оцінка*:</label>
+    <label for="mark" class="col-sm-2 control-label">{% trans "Rating" %}*</label>
     <div class="col-sm-4">
-      <input type="text" value="{{ request.POST.mark }}" name="mark" id="mark" value="" class="form-control" placeholder="Оцінка" >
+      <input type="text" value="{{ request.POST.mark }}" name="mark" id="mark" value="" class="form-control" placeholder="{% trans "Rating" %}" >
       <span class="help-block">{{ errors.mark }}</span>
     </div>
   </div>
   <div class="form-group {% if errors.notes %}has-error{% endif %}">
-  <label for="notes" class="col-sm-2 control-label">Додаткові Нотатки:</label>
+  <label for="notes" class="col-sm-2 control-label">{% trans "Notes" %}</label>
   <div class="col-sm-4">
    <textarea name="notes" id="notes" class="form-control">{{ request.POST.notes }}</textarea>
    <span class="help-block">{{ errors.notes }}</span>
@@ -74,9 +74,9 @@
   </div>
  
   <div class="col-xs-12" id="buttons">
-  <button type="submit" class="btn btn-primary" name="add_button">Зберегти</button>
-  <button type="submit" class="btn btn-default" id="whiteBtn" name="cancel_button" >Скасувати</button>
+  <button type="submit" class="btn btn-primary" name="add_button">{% trans "Save" %}</button>
+  <button type="submit" class="btn btn-default" id="whiteBtn" name="cancel_button">{% trans "Cancel" %}</button>
   </div>
   </form>
  </div>
-{% endblock content %}2017-09-10 12-00-00
+{% endblock content %}

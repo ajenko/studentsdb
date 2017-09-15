@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.utils.translation import ugettext as _
 
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
@@ -60,34 +60,34 @@ def exams_add(request):
 			# validate user input 
 			subject = request.POST.get('subject', '').strip()
 			if not subject:
-				errors['subject'] = u"Назва предмета є обов'язковою"
+				errors['subject'] = _(u"Subject field is required")
 			else:
 				data['subject'] = subject
 		
 			date_time = request.POST.get('date_time', '').strip()
 			if not date_time:
-				errors['date_time'] = u"Дата та час іспиту є обов'язковою"
+				errors['date_time'] = u"Date and time field is required"
 			else:
 				try:
 					datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
 				except Exception:
-					errors['date_time'] = u'Введіть коректний формат дати(2017-09-01 12:00:00'
+					errors['date_time'] = u'Enter the correct input format(2017-09-01 12:00:00'
 				else:
 					data['date_time'] = date_time	
 		
 			teacher = request.POST.get('teacher', '').strip()
 			if not teacher:
-				errors['teacher'] = u"Викладач є обов'язковим"
+				errors['teacher'] = _(u"Teacher filed is required")
 			else:
 				data['teacher'] = teacher
 
 			group = request.POST.get('group', '').strip()
 			if not group:
-				errors['group'] = u"Оберіть групу для студента"
+				errors['group'] = _(u"Choose a students group")
 			else:
 				groups = Group.objects.filter(pk=group)
 				if len(groups) != 1:
-					errors['group'] = u"Оберіть коректну групу"
+					errors['group'] = _(u"Choose a correct students group")
 				else:	
 					data['group'] = groups[0]
 
@@ -98,7 +98,7 @@ def exams_add(request):
 
 				#redirect to exams list
 				return HttpResponseRedirect(
-					u'%s?status_message=Іспит {0} успішно додано!'.format(subject) % reverse('exams'))
+					u'%s?status_message=%s' % (reverse('exams'), _(u'The exam {0} added successfully!').format(subject)))
 
 			else:
 				# render form with errors and previous user input
@@ -109,7 +109,7 @@ def exams_add(request):
 		elif request.POST.get('cancel_button') is not None:
 			# redirect to home page on cancel button
 			return HttpResponseRedirect(
-				u'%s?status_message=Додавання іспита скасовано!' % reverse('exams'))
+				u'%s?status_message=%s' % (reverse('exams'), _(u'The exam add is canceled!')))
 	else:
 		# initial form render
 		return render(request, 'students/exams_add.html',
@@ -139,8 +139,8 @@ class ExamUpdateForm(ModelForm):
 
 		# add buttons
 		self.helper.layout.append(FormActions(
-			Submit('add_button', u'Зберегти', css_class="btn btn-primary"), 
-			Submit('cancel_button', u'Скасувати', css_class="btn btn-link")))
+			Submit('add_button', _(u'Save'), css_class="btn btn-primary"), 
+			Submit('cancel_button', _(u'Cancel'), css_class="btn btn-link")))
 
 
 class ExamUpdateView(UpdateView):
@@ -149,12 +149,12 @@ class ExamUpdateView(UpdateView):
 	form_class = ExamUpdateForm
 
 	def get_success_url(self):
-		return u'%s?status_message=Іспит успішно додано!' % reverse('exams')
+		return u'%s?status_message=%s' % (reverse('exams'), _(u'The exam updated successfully!'))
 	
 	def post(self, request, *args, **kwargs):
 		if request.POST.get('cancel_button'):
 			return HttpResponseRedirect(
-				u'%s?status_message=Редагування іспита відмінено' % reverse('exams'))
+				u'%s?status_message=%s' % (reverse('exams'), _(u'The exam update is canceled!')))
 		else:
 			return super(ExamUpdateView, self).post(request, *args, **kwargs)
 
@@ -163,5 +163,5 @@ class ExamDeleteView(DeleteView):
 	template_name = 'students/exams_confirm_delete.html'
 
 	def get_success_url(self):
-		return u'%s?status_message=Іспит успішно видалено!' % reverse('exams')
+		return u'%s?status_message=%s' % (reverse('exams'), _(u'The exam deleted successfully!'))
 

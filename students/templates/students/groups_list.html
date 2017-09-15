@@ -1,13 +1,14 @@
 {% extends "students/base.html" %}
+{% load i18n %}
 
 {% load static from staticfiles %}
 
-{% block meta_title %}Групи{% endblock meta_title %}
+{% block meta_title %}{% trans "Groups" %}{% endblock meta_title %}
 
-{% block title %}Групи{% endblock title %}
+{% block title %}{% trans "Groups" %}{% endblock title %}
 {% block content %}
   	       <!-- Add Groups Button -->
-  	    <a class="btn btn-primary" href="{% url "groups_add" %}" id="group-add-form-link">Додати групу</a>
+  	    <a class="btn btn-primary" href="{% url "groups_add" %}" id="group-add-form-link">{% trans "Add Group" %}</a>
 
   	    <!-- Start Groups Listing -->
 
@@ -16,14 +17,14 @@
         {% with order_by=request.GET.order_by reverse=request.GET.reverse %}
   	        <tr>
   	         <th><a href="{% url 'groups' %}?order_by=id{% if order_by == 'id' and reverse != '1' %}&amp;reverse=1{% endif %}">
-              №
+              {% trans "#" %}
               {% if order_by == 'id' and reverse != '1' %}&uarr;
               {% elif order_by == 'id' and reverse == '1' %}&darr;
               {% endif %}
 
               </a>
   	          <th><a href="{% url 'groups' %}?order_by=title{% if order_by == 'title' and reverse != '1' %}&amp;reverse=1{% endif %}">
-              Назва
+              {% trans "Title" %}
               {% if order_by == 'title' and reverse != '1' %}&uarr;
               {% elif order_by == 'title' and reverse == '1' %}&darr;
               {% endif %}
@@ -31,13 +32,13 @@
               </a>
               </th>
   	          <th><a href="{% url 'groups' %}?order_by=leader{% if order_by == 'leader' and reverse != '1' %}&amp;reverse=1{% endif %}">
-              Староста
+              {% trans "Leader" %}
               {% if order_by == 'leader' and reverse != '1' %}&uarr;
               {% elif order_by == 'leader' and reverse == '1' %}&darr;
               {% endif %}
               </a>
               </th>      
-  	          <th>Дії</th>
+  	          <th>{% trans "Actions" %}</th>
   	        </tr>
             {% endwith %}
   	      </thead>
@@ -45,18 +46,18 @@
            {% for group in groups %}
   	       <tr>
   	          <td>{{ forloop.counter0|add:groups.start_index}}</td>
-  	          <td><a title="Редагувати" href="{% url "groups_edit" group.id %}">{{ group.title }}</a></td>
-  	          <td><a title="Редагувати" href="{% url "students_edit" group.leader.id %}">{{ group.leader }}</a></td>
+  	          <td><a title="{% trans "Edit" %}" href="{% url "groups_edit" group.id %}">{{ group.title }}</a></td>
+  	          <td><a title="{% trans "Edit" %}" href="{% url "students_edit" group.leader.id %}">{{ group.leader }}</a></td>
   	          <td>
   	          	<div class="dropdown">
-  				      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Дія
+  				      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{% trans "Action" %}
                 <span class="caret"></span>
                   </button>
 
   				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    			<li role="presentation"><a href="{% url "groups_edit" group.id %}" class="group-edit-form-link">Редагувати</a></li>
+    			<li role="presentation"><a href="{% url "groups_edit" group.id %}" class="group-edit-form-link">{% trans "Edit" %}</a></li>
     			<li>
-    			<a role="menuitem" tabindex="-1" href="{% url "groups_delete" group.id %}" class="group-delete-form-link">Видалити</a></li>
+    			<a role="menuitem" tabindex="-1" href="{% url "groups_delete" group.id %}" class="group-delete-form-link">{% trans "Delete" %}</a></li>
   				</ul>
 				</div>
   	          </td>

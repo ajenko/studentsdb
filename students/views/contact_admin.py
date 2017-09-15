@@ -1,4 +1,3 @@
-# _*_ coding: utf-8 _*_
 
 from django.shortcuts import render
 from django import forms
@@ -8,7 +7,7 @@ from django.core.urlresolvers import reverse
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-
+from django.utils.translation import ugettext as _
 from studentsdb.settings import ADMIN_EMAIL
 import logging
 
@@ -36,18 +35,18 @@ class ContactForm(forms.Form):
 		self.helper.field_class = 'col-sm-4'
 
 		# form buttons
-		self.helper.add_input(Submit('send_button', u'Надіслати'))
+		self.helper.add_input(Submit('send_button', _(u'Send')))
 
 
 	from_email = forms.EmailField(
-		label = u"Ваша Емейл Адреса:")
+		label = _(u"Your e-mail"))
 
 	subject = forms.CharField(
-		label = u"Заголовок листа:",
+		label = _(u"Title"),
 		max_length = 128)
 
 	message = forms.CharField(
-		label = u"Текст повідомлення:",
+		label = _(u"Text message"),
 		max_length = 2560,
 		widget = forms.Textarea)
 
@@ -68,11 +67,11 @@ def contact_admin(request):
 			try:
 				send_mail(subject, message, from_email, [ADMIN_EMAIL])
 			except Exception:
-				message = u'Під час відправки виникла непередбачувана помилка.Спробуйте скористатись даною формою пізніше.'
+				message = _(u'The error occured after sending a message. Please, try later.')
 				logger = loggin.getLogger(__name__)
 				logger.exception(message)
 			else: 
-				message = u'Повідомлення успішно надіслане!'
+				message = _(u'The message has been sent successfully!')
 
 
 			# redirect to the same contact page with success message

@@ -37,4 +37,8 @@ h1, h2, h3, h4, h5, h6 {
 	color: #555555;
 }
 
-
+/* User`s Toolbar */
+#user-toolbar {
+	margin-top: 30px;
+	text-align: right;
+}

@@ -1,21 +1,21 @@
 {% extends "students/base.html" %}
-
+{% load i18n %}
 {% load static from staticfiles %}
 {% load crispy_forms_tags %}
 
-{% block meta_title %}Додати Групу{% endblock meta_title %}
-{% block title %}Додати Групу{% endblock title %}
+{% block meta_title %}{% trans "Add the Group" %}{% endblock meta_title %}
+{% block title %}{% trans "Add the Group" %}{% endblock title %}
 
 
 {% block status_message %}
   {% if errors %}
   <div class="alert alert-warning" role="alert">
-    Будь ласка, виправте наступні помилки
+    {% trans "Please, correct following mistakes" %}
   </div>
   {% endif %}
 {% endblock status_message %}
 	
 
   {% block content %}
-		{% crispy form %}
+ {% crispy form %}
 {% endblock content %}

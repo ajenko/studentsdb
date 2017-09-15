@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.utils.translation import ugettext as _
 
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
@@ -58,17 +58,17 @@ def groups_add(request):
 			# validate user input 
 			title = request.POST.get('title', '').strip()
 			if not title:
-				errors['title'] = u"Назва групи є обов'язковою"
+				errors['title'] = _(u"Title field is required")
 			else:
 				data['title'] = title
 
 			leader = request.POST.get('leader', '').strip()
 			if not leader:
-				errors['leader'] = u"Староста є обов'язковим"
+				errors['leader'] = _(u"Leader field is required")
 			else:
 				leaders = Student.objects.filter(pk=leader)
 				if len(leaders) != 1:
-					errors['leader'] = u'Оберіть правильного старосту'
+					errors['leader'] = _(u'Choose the correct leader')
 				else:	
 					data['leader'] = leader[0]
 
@@ -77,8 +77,7 @@ def groups_add(request):
 					group.save()
 				
 					return HttpResponseRedirect(
-						u'%s?status_message=Групу {0} успішно додано!'.format(title) % reverse('groups'))
-					
+						u'%s?status_message=%s'% (reverse('groups'), _(u'The group {0} added successfully!').format(title)))
 			else:
 				# render form with errors and previous user input 
 				return render(request, 'students/groups_add.html',
@@ -88,7 +87,7 @@ def groups_add(request):
 		elif request.POST.get('cancel_button') is not None:
 			# redirect to home page on cancel button
 			return HttpResponseRedirect(
-				u'%s?status_message=Додавання групи скасовано!' % reverse('groups'))
+				u'%s?status_message=%s' % (reverse('groups'), _(u'The group add is canceled!')))
 
 	else:
 		# initial form render
@@ -121,8 +120,8 @@ class GroupAddForm(ModelForm):
 
 		# add buttons
 		self.helper.layout.append(FormActions(
-			Submit('add_button', u'Зберегти', css_class = "btn btn-primary"), 
-			Submit('cancel_button', u'Скасувати', css_class = "btn btn-link")))
+			Submit('add_button', _(u'Save'), css_class = "btn btn-primary"), 
+			Submit('cancel_button', _(u'Cancel'), css_class = "btn btn-link")))
 
 class GroupAddView(CreateView):
 	model = Group
@@ -130,11 +129,11 @@ class GroupAddView(CreateView):
 	form_class = GroupAddForm
 
 	def get_success_url(self):
-		return u'%s?status_message=Група успішно додана!' % reverse('groups')
+		return u'%s?status_message=%s' % (reverse('groups'), _(u'The group added successfully!'))
 
 	def post(self, request, *args, **kwargs):
 		if request.POST.get('cancel_button'):
-			return HttpResponseRedirect(u'%s?status_message=Редагування групи відмінено!' % reverse('groups'))
+			return HttpResponseRedirect(u'%s?status_message=%s' % (reverse('groups'), _(u'The group add is canceled!')))
 		else:
 			return super(GroupAddView, self).post(request, *args, **kwargs)
 
@@ -166,8 +165,8 @@ class GroupUpdateForm(ModelForm):
 
 		# add buttons
 		self.helper.layout.append(FormActions(
-			Submit('add_button', u'Зберегти', css_class = "btn btn-primary"), 
-			Submit('cancel_button', u'Скасувати', css_class = "btn btn-link")
+			Submit('add_button', _(u'Save'), css_class = "btn btn-primary"), 
+			Submit('cancel_button', _(u'Cancel'), css_class = "btn btn-link")
 			))
 
 
@@ -179,11 +178,11 @@ class GroupUpdateView(UpdateView):
 	form_class = GroupUpdateForm
 
 	def get_success_url(self):
-		return u'%s?status_message=Групу успішно збережено!' % reverse('groups')
+		return u'%s?status_message=%s' % (reverse('groups'), _(u'The group updated successfully!'))
 
 	def post(self, request, *args, **kwargs):
 		if request.POST.get('cancel_button'):
-			return HttpResponseRedirect(u'%s?status_message=Редагування групи відмінено!' % reverse('groups'))
+			return HttpResponseRedirect(u'%s?status_message=%s' % (reverse('groups'), _(u'The group update is canceled!')))
 		else:
 			return super(GroupUpdateView, self).post(request, *args, **kwargs)
 
@@ -193,4 +192,4 @@ class GroupDeleteView(DeleteView):
 	template_name = 'students/groups_confirm_delete.html'
 
 	def get_success_url(self):
-		return u'%s?status_message=Групу успішно видалено!' % reverse('groups')
+		return u'%s?status_message=%s' % (reverse('groups'), _(u'The group deleted successfully!'))
