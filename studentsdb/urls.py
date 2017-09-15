@@ -14,16 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 #from students.views.ratings import ratings_ajax_next_page
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from django.views.i18n import javascript_catalog
 from students.views import students, groups, journal, exams, ratings, contact_admin
 from students.views.students import StudentUpdateView, StudentDeleteView
 from students.views.groups import GroupUpdateView, GroupDeleteView, GroupAddView
 from students.views.exams import ExamUpdateView, ExamDeleteView
 from students.views.ratings import RatingUpdateView, RatingDeleteView
 from students.views.journal import JournalView
+from students.util import choose_lang
 from .settings import MEDIA_URL, MEDIA_ROOT, DEBUG
 from django.conf.urls.static import static
+from django.views.generic.base import RedirectView, TemplateView
+
+js_info_dict = {
+    'packages': ('students', ), 
+}   
 
 urlpatterns = [
 	# Students urls
@@ -58,7 +66,19 @@ urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 
     # Contact admin Form
-    url(r'^contact-admin/$', contact_admin.contact_admin, name = 'contact_admin'),
+    url(r'^contact-admin/$', contact_admin.contact_admin, name='contact_admin'),
+
+    # javascript
+    url(r'^jsi18n\.js$', javascript_catalog, js_info_dict, name='javascript_catalog'),
+
+    # Choose Lang 
+    url(r'^choose-lang-cookie-name/$', choose_lang, name='choose_lang'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+
+    # User Releted urls
+    url(r'^users/logout/$', auth_views.logout, kwargs={'next_page': 'home'}, name='auth_logout'),
+    url(r'^register/complete/$', RedirectView.as_view(pattern_name='home'), name='registration_complete'),
+    url(r'^users/', include('registration.backends.simple.urls', namespace='users')),
 ]
 
 

@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'registration',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -45,9 +46,11 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -57,7 +60,7 @@ ROOT_URLCONF = 'studentsdb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'studentsdb', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,7 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-EN'
+LANGUAGE_CODE = 'uk'
+#LANGUAGE_CODE = 'en'
+#TIME_ZONE = 'Europe/Kiev'
 
 TIME_ZONE = 'UTC'
 
@@ -111,6 +116,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LANGUAGES = (
+    ('en', u'English'),
+    ('uk', u'Ukrainian'),
+    )
+    
 
 
 # Static files (CSS, JavaScript, Images)
@@ -138,7 +149,7 @@ ADMIN_EMAIL = 'admin@studentsdb.com'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '465'
 EMAIL_HOST_USER = 'a.kobryk@gmail.com'
-EMAIL_HOST_PASSWORD = '300629uausa1620@'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
@@ -191,3 +202,5 @@ LOGGING = {
         }
     }
 }
+
+REGISTRATION_OPEN = True
