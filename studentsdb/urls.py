@@ -24,10 +24,11 @@ from students.views.groups import GroupUpdateView, GroupDeleteView, GroupAddView
 from students.views.exams import ExamUpdateView, ExamDeleteView
 from students.views.ratings import RatingUpdateView, RatingDeleteView
 from students.views.journal import JournalView
-from students.util import choose_lang
+#from students.util import choose_lang
 from .settings import MEDIA_URL, MEDIA_ROOT, DEBUG
 from django.conf.urls.static import static
 from django.views.generic.base import RedirectView, TemplateView
+from django.contrib.auth.decorators import login_required
 
 js_info_dict = {
     'packages': ('students', ), 
@@ -41,26 +42,26 @@ urlpatterns = [
     url(r'^students/(?P<pk>\d+)/delete/$', StudentDeleteView.as_view(), name='students_delete'),
     
     # Groups urls
-    url(r'^groups/$', groups.groups_list, name='groups'),
+    url(r'^groups/$', login_required(groups.groups_list), name='groups'),
    # url(r'^groups/add/$', groups.groups_add, name='groups_add'),
-   url(r'^groups/add/$', GroupAddView.as_view(), name='groups_add'),
-    url(r'^groups/(?P<pk>\d+)/edit/$', GroupUpdateView.as_view(), name='groups_edit'),
-    url(r'^groups/(?P<pk>\d+)/delete/$', GroupDeleteView.as_view(), name='groups_delete'),
+   url(r'^groups/add/$', login_required(GroupAddView.as_view()), name='groups_add'),
+    url(r'^groups/(?P<pk>\d+)/edit/$', login_required(GroupUpdateView.as_view()), name='groups_edit'),
+    url(r'^groups/(?P<pk>\d+)/delete/$', login_required(GroupDeleteView.as_view()), name='groups_delete'),
 
     #Journal urls
     url(r'^journal/(?P<pk>\d+)?/?$', JournalView.as_view(), name='journal'),
 
     # Exams urls
-    url(r'^exams/$', exams.exams_list, name='exams'),
-    url(r'^exams/add/$', exams.exams_add, name='exams_add'),
-    url(r'^exams/(?P<pk>\d+)/edit/$', ExamUpdateView.as_view(), name='exams_edit'),
-    url(r'^exams/(?P<pk>\d+)/delete/$', ExamDeleteView.as_view(), name='exams_delete'),
+    url(r'^exams/$', login_required(exams.exams_list), name='exams'),
+    url(r'^exams/add/$', login_required(exams.exams_add), name='exams_add'),
+    url(r'^exams/(?P<pk>\d+)/edit/$', login_required(ExamUpdateView.as_view()), name='exams_edit'),
+    url(r'^exams/(?P<pk>\d+)/delete/$', login_required(ExamDeleteView.as_view()), name='exams_delete'),
 
     # Ratings urls
-    url(r'^ratings/$', ratings.ratings_list, name='ratings'),
-    url(r'^ratings/add/$', ratings.ratings_add, name='ratings_add'),
-    url(r'^ratings/(?P<pk>\d+)/edit/$', RatingUpdateView.as_view(), name='ratings_edit'),
-    url(r'^ratings/(?P<pk>\d+)/delete/$', RatingDeleteView.as_view(), name='ratings_delete'),
+    url(r'^ratings/$', login_required(ratings.ratings_list), name='ratings'),
+    url(r'^ratings/add/$', login_required(ratings.ratings_add), name='ratings_add'),
+    url(r'^ratings/(?P<pk>\d+)/edit/$', login_required(RatingUpdateView.as_view()), name='ratings_edit'),
+    url(r'^ratings/(?P<pk>\d+)/delete/$', login_required(RatingDeleteView.as_view()), name='ratings_delete'),
    # url(r'ratings/next_page$', ratings.ratings_ajax_next_page, name ='ratings_next_page'),
 
 	url(r'^admin/', admin.site.urls),
@@ -72,13 +73,17 @@ urlpatterns = [
     url(r'^jsi18n\.js$', javascript_catalog, js_info_dict, name='javascript_catalog'),
 
     # Choose Lang 
-    url(r'^choose-lang-cookie-name/$', choose_lang, name='choose_lang'),
+   # url(r'^set_language/(?P<user_language>\w+)/$', choose_lang, name='choose_lang'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
     # User Releted urls
+    url(r'^users/profile/$', login_required(TemplateView.as_view(template_name='registration/profile.html')), name='profile'),
     url(r'^users/logout/$', auth_views.logout, kwargs={'next_page': 'home'}, name='auth_logout'),
     url(r'^register/complete/$', RedirectView.as_view(pattern_name='home'), name='registration_complete'),
     url(r'^users/', include('registration.backends.simple.urls', namespace='users')),
+
+    # Social Auth Releted urls
+    url('^social/', include('social_django.urls', namespace='social'))
 ]
 
 
