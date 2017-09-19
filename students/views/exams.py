@@ -17,6 +17,9 @@ from django.views.generic import UpdateView, DeleteView
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from crispy_forms.bootstrap import FormActions
+
+from django.contrib.auth.decorators import login_required
+from .dispatch_view import Dispatch
 # Create your views here.
 
 # Views for Exams
@@ -43,7 +46,7 @@ def exams_list(request):
 
 	
 	return render(request, 'students/exams_list.html', context)
-
+@login_required
 def exams_add(request):
 
 	# IT DOESN`T WORK NOW!!!
@@ -143,7 +146,7 @@ class ExamUpdateForm(ModelForm):
 			Submit('cancel_button', _(u'Cancel'), css_class="btn btn-link")))
 
 
-class ExamUpdateView(UpdateView):
+class ExamUpdateView(Dispatch, UpdateView):
 	model = Exam
 	template_name = 'students/exams_edit.html'
 	form_class = ExamUpdateForm
@@ -158,7 +161,7 @@ class ExamUpdateView(UpdateView):
 		else:
 			return super(ExamUpdateView, self).post(request, *args, **kwargs)
 
-class ExamDeleteView(DeleteView):
+class ExamDeleteView(Dispatch, DeleteView):
 	model = Exam
 	template_name = 'students/exams_confirm_delete.html'
 

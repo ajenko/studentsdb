@@ -33,11 +33,38 @@
   			
   			<!-- Logo -->
   			<div class="col-xs-6">
-  			  <h1>{% trans "Students Accounting Service" %}</h1>	
+  			  <h1>{% trans "Students Accounting Service" %}</h1>
   			</div>
+         <!-- Set Language if the user is authenticated -->
+        {% if not user.is_authenticated %}
+        <div class="col-xs-2" id="set-language-not-auth">
+         <form action="/i18n/setlang/" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="" />
+    <ul class="nav navbar-nav navbar-right language menu"> 
+        {% get_available_languages as LANGUAGES %}
+        {% for lang in LANGUAGES %}
+            <li>
+                <button type="submit"
+                        name="language"
+                        value="{{ lang.0 }}"
+                        class="{% if lang.0 == LANGUAGE_CODE %}selected{% endif %}">
+                       {% if lang.0 == 'uk' %}
+                        <img height="20" width="20" src="{% static "img/ger-byf.png"%}">
+                       {% elif lang.0 == 'en' %} 
+                        <img height="20" width="20" src="{% static "img/gb.png"%}">
+                       {% endif %}
+                    
+                </button>
+            </li>
+        {% endfor %}
+    </ul>
+</form>
+        </div>
+        {% endif %}
 
 
-        <!-- Language -->
+        
     
   			<!-- Groups Selectors -->
         {% if user.is_authenticated %}
@@ -57,14 +84,15 @@
 
         <!-- User`s toolbar for authenticated users -->
         <div class="col-xs-2" id="user-toolbar">
-          <span>{{ user.username }}</span> |
+          <a href="{% url "profile" %}">{{ user.get_full_name|default:user.username }}</a> |
           <a href="{% url "users:auth_logout" %}">{% trans "Logout"%}</a>
         </div>
 
         {% else %}
 
         <!-- User`s toolbar for anonymous users -->
-        <div class="col-xs-6" id="user-toolbar">
+        <div class="col-xs-4" id="user-toolbar">
+          <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">{% trans "via Facebook" %}</a> |
           <a href="{% url "users:auth_login" %}">{% trans "Login"%}</a> |
           <a href="{% url "users:registration_register" %}">{% trans "Register"%}</a>
         </div>
@@ -76,11 +104,12 @@
 
   		<!-- Start Subheader -->
   		<div class="row" id="sub-header">
-  			<div class="col-xs-12">
+  			<div class="col-xs-8">
           <ul class="nav nav-tabs" role="tablist">
          {% url "home" as home_url %}
           <li role="presentation" {% if request.path == home_url %}class="active"{% endif %}><a href="{{ home_url }}">{% trans "Students"%}</a></li>
          {% url "journal" as journal_url %}
+         {% if user.is_authenticated %}
           <li role="presentation" {% if journal_url in request.path %}class="active"{% endif %}><a href={{ journal_url }}>{% trans "Journal" %}</a></li>
           {% url "groups" as groups_url %}
           <li role="presentation" {% if groups_url in request.path %}class="active"{% endif %}><a href="{{ groups_url }}">{% trans "Groups" %}</a></li>
@@ -88,11 +117,44 @@
           <li role="presentation" {% if exams_url in request.path %}class="active"{% endif %}><a href="{{ exams_url }}">{% trans "Exams" %}</a></li>
           {% url "ratings" as ratings_url %}
           <li role="presentation" {% if ratings_url in request.path %}class="active"{% endif %}><a href="{{ ratings_url }}">{% trans "Ratings" %}</a></li>
+           {% endif %}
           {% url 'contact_admin' as contact_admin_url %}
+          {% if perms.auth.add_user %}
           <li role="presentation" {% if contact_admin_url in request.path %}class="active"{% endif %}><a href="{{ contact_admin_url }}" id="admin-add-form-link">{% trans "Contact" %}</a></li>
-             </ul>
+          {% endif %}
+             </ul> 
   			</div>
+
+        <!-- Set Language if the user is authenticated -->
+        {% if user.is_authenticated %}
+        <div class="col-xs-4" id="set-language">
+         <form action="/i18n/setlang/" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="" />
+    <ul class="nav navbar-nav navbar-right language menu"> 
+        {% get_available_languages as LANGUAGES %}
+        {% for lang in LANGUAGES %}
+            <li>
+                <button type="submit"
+                        name="language"
+                        value="{{ lang.0 }}"
+                        class="{% if lang.0 == LANGUAGE_CODE %}selected{% endif %}">
+                       {% if lang.0 == 'uk' %}
+                        <img height="20" width="20" src="{% static "img/ger-byf.png"%}">
+                       {% elif lang.0 == 'en' %} 
+                        <img height="20" width="20" src="{% static "img/gb.png"%}">
+                       {% endif %}
+                    
+                </button>
+            </li>
+        {% endfor %}
+    </ul>
+      </form>
+        </div>
+        {% endif %}
+
   		</div> 
+
   	    <!-- End SubHeader -->
 
   	    <!-- Start Main Page Content --> 
@@ -121,26 +183,10 @@
 
   	    <!-- Start Footer -->
   	    <div class="row" id="footer">
-  	      <div class="col-xs-12">
+  	      <div class="col-xs-6">
   	       &copy; 2017 {% trans "Students Accounting Service" %}
   	      </div>
-          <!-- Language -->
-        
-     
-        <div class="col-xs-2" id="lang-selector">
-          <form action="/i18n/setlang/" method="post">
-          {% csrf_token %}
-          <input name="next" type="hidden" value="">
-          <select class="select-style" name="language" onchange="this.form.submit();">
-            {% get_available_languages as LANGUAGES %}
-            <option selected="selected" disabled="disabled">Select your language</option>
-            {% for lang in LANGUAGES %}
-                <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %} selected="selected"{% endif %}>{{lang.1|title}}</option>
-            {% endfor %}
-          </select>
-      </form>
-        </div> -->
-  	    </div>
+      	    </div>
   	    <!-- End Footer -->
 
   	    </div> 

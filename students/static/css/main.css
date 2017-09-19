@@ -42,3 +42,12 @@ h1, h2, h3, h4, h5, h6 {
 	margin-top: 30px;
 	text-align: right;
 }
+
+/* Change Language */
+#set-language form {
+	margin-right: 12px;
+}
+
+#set-language-not-auth form {
+	margin-top: 27px;
+}

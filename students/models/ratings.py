@@ -9,6 +9,7 @@ class Rating(models.Model):
 	class Meta(object):
 		verbose_name = _(u'Rating')
 		verbose_name_plural = _(u'Ratings')
+		ordering = ['student']
 
 	student = models.ForeignKey('Student',
 		max_length = 256,

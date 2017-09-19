@@ -11,6 +11,8 @@ from django.utils.translation import ugettext as _
 from studentsdb.settings import ADMIN_EMAIL
 import logging
 
+from django.contrib.auth.decorators import permission_required 
+
 
 
 class ContactForm(forms.Form):
@@ -50,7 +52,7 @@ class ContactForm(forms.Form):
 		max_length = 2560,
 		widget = forms.Textarea)
 
-
+@permission_required('auth.add_user')
 def contact_admin(request):
 	# check if form was posted 
 	if request.method == 'POST':

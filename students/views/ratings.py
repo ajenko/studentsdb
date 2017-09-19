@@ -17,6 +17,9 @@ from django.views.generic import UpdateView, DeleteView
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from crispy_forms.bootstrap import FormActions
+
+from django.contrib.auth.decorators import login_required
+from .dispatch_view import Dispatch
 # Create your views here.
 
 # Views for Exams
@@ -57,7 +60,7 @@ def ratings_ajax_next_page(request):
     		return HttpResponse(next_page)
 
  """
-
+@login_required
 def ratings_add(request):
 	# was form posted?
 	if request.method == "POST":
@@ -163,7 +166,7 @@ class RatingUpdateForm(ModelForm):
 
 
 
-class RatingUpdateView(UpdateView):
+class RatingUpdateView(Dispatch, UpdateView):
 	model = Rating
 	template_name = 'students/ratings_edit.html'
 	form_class = RatingUpdateForm
@@ -178,7 +181,7 @@ class RatingUpdateView(UpdateView):
 		else:
 			return super(RatingUpdateView, self).post(request, *args, **kwargs)
 
-class RatingDeleteView(DeleteView):
+class RatingDeleteView(Dispatch, DeleteView):
 	model = Rating
 	template_name = 'students/ratings_confirm_delete.html'
 

@@ -17,6 +17,9 @@ from crispy_forms.bootstrap import FormActions
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from ..util import paginate, get_current_group 
+
+from django.contrib.auth.decorators import login_required
+from .dispatch_view import Dispatch
 # Create your views here.
 
 # Views for Groups
@@ -44,7 +47,7 @@ def groups_list(request):
 		var_name = 'groups')
 	
 	return render(request, 'students/groups_list.html', context)
-
+@login_required
 def groups_add(request):
 	# was form posted?
 	if request.method == "POST":
@@ -123,7 +126,7 @@ class GroupAddForm(ModelForm):
 			Submit('add_button', _(u'Save'), css_class = "btn btn-primary"), 
 			Submit('cancel_button', _(u'Cancel'), css_class = "btn btn-link")))
 
-class GroupAddView(CreateView):
+class GroupAddView(Dispatch, CreateView):
 	model = Group
 	template_name = 'students/groups_add_class.html'
 	form_class = GroupAddForm
@@ -172,7 +175,7 @@ class GroupUpdateForm(ModelForm):
 
 
 
-class GroupUpdateView(UpdateView):
+class GroupUpdateView(Dispatch, UpdateView):
 	model = Group
 	template_name = 'students/groups_edit.html'
 	form_class = GroupUpdateForm
@@ -187,7 +190,7 @@ class GroupUpdateView(UpdateView):
 			return super(GroupUpdateView, self).post(request, *args, **kwargs)
 
 
-class GroupDeleteView(DeleteView):
+class GroupDeleteView(Dispatch, DeleteView):
 	model = Group
 	template_name = 'students/groups_confirm_delete.html'
 
