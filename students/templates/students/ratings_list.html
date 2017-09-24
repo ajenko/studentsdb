@@ -1,6 +1,7 @@
 {% extends "students/base.html" %}
 {% load i18n %}
 {% load static from staticfiles %}
+{% load pagenav %}
 
 {% block meta_title %}{% trans "Ratings" %}{% endblock meta_title %}
 
@@ -52,7 +53,7 @@
   	      <tbody>
            {% for rating in ratings %}
   	       <tr>
-  	          <td>{{ forloop.counter }}</td>
+  	          <td>{{ forloop.counter0|add:ratings.start_index}}</td>
   	          <td><a title="{% trans "Edit" %}" href="#">{{ rating.student }}</a></td>
   	          <td><a title="{% trans "Edit" %}" href="#">{{ rating.date_time }}</a></td>
               <td><a title="" href="#">{{ rating.subject }}</a></td>
@@ -76,7 +77,7 @@
   	      </tbody>
          
   	    </table>
-         
+         {% pagenav ratings is_paginated paginator %}
     
        <div id="demo"><h2>Let AJAX change this text</h2></div>
        <button type="button" onclick="loadDoc()">Change Content</button>

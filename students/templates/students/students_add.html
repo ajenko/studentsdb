@@ -1,6 +1,7 @@
 {% extends "students/base.html" %}
 {% load i18n %}
 {% load static from staticfiles %}
+{% load str2int %}
 
 {% block meta_title %}{% trans "Add the Student" %}{% endblock meta_title %}
 {% block title %}{% trans "Add the student" %}{% endblock title %}
@@ -71,7 +72,7 @@
       <select class="form-control" value=value="''" name="students_group" id="students_group" >
         <option value="">{% trans "Choose the group" %}</option>
         {% for group in groups %}
-        <option value="{{ group.id }}" {% if group.id == request.POST.students_group|add:0 %}selected="1"{% endif %}>{{ group.title }}</option>
+        <option value="{{ group.id }}" {% if group.id == request.POST.students_group|str2int %}selected="1"{% endif %}>{{ group.title }}</option>
         {% endfor %}
         <span class="help-block">{{ errors.students_group }}</span>
       </select>
