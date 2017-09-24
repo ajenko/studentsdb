@@ -4,10 +4,12 @@ import logging
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver 
 
+from django.contrib.auth.models import User
 from .models.students import Student
 from .models.groups import Group
 from .models.exams import Exam
 from .models.ratings import Rating
+
 
 
 # Students
@@ -102,3 +104,25 @@ def log_rating_delete_event(sender, **kwargs):
 
 	rating = kwargs['instance']
 	logger.info(u'Rating deleted: %s %s (ID: %d)', rating.student, rating.subject, rating.id)
+
+# Users
+# ------------------------------------------------------------------------------
+@receiver(post_save, sender=User)
+def log_user_updated_added_event(sender, **kwargs):
+	""" Writes information aboit newly added or updated user info log file """ 
+	logger = logging.getLogger(__name__)
+
+	user = kwargs['instance']
+	if kwargs['created']:
+		logger.info(u'User added: %s %s (ID: %d', user.username, user.email, user.id)
+	else:
+		logger.info(u'User updated: %s %s (ID: %d)', user.username, user.email, user.id)
+
+@receiver(post_delete, sender=User)
+def log_user_delete_event(sender, **kwargs):
+	""" Writes information about deleted user info log file """ 
+	logger = logging.getLogger(__name__)
+
+	user = kwargs['instance']
+	logger.info(u'User deleted: %s %s (ID: %d)', user.username, user.email, user.id)
+
