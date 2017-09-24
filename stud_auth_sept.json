@@ -1,0 +1,10 @@
+[
+{
+    "model": "stud_auth.stprofile",
+    "pk": 1,
+    "fields": {
+        "user": 3,
+        "mobile_phone": "380975089767"
+    }
+}
+]
