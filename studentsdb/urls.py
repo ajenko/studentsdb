@@ -30,12 +30,14 @@ from django.conf.urls.static import static
 from django.views.generic.base import RedirectView, TemplateView
 from django.contrib.auth.decorators import login_required
 
+
 js_info_dict = {
     'packages': ('students', ), 
 }   
 
 urlpatterns = [
-	# Students urls
+
+    # Students urls
 	url(r'^$', students.students_list, name='home'), 
     url(r'^students/add/$', students.students_add, name='students_add'),
     url(r'^students/(?P<pk>\d+)/edit/$', StudentUpdateView.as_view(), name='students_edit'),

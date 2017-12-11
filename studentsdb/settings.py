@@ -146,9 +146,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 
 # Fixtures
 
-FIXTURE_DIRS = (
-   '/../fixtures/',
-)
+
 
 
 # email settings
