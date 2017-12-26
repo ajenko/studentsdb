@@ -45,8 +45,8 @@ urlpatterns = [
     
     # Groups urls
     url(r'^groups/$', login_required(groups.groups_list), name='groups'),
-   # url(r'^groups/add/$', groups.groups_add, name='groups_add'),
-   url(r'^groups/add/$', login_required(GroupAddView.as_view()), name='groups_add'),
+
+    url(r'^groups/add/$', login_required(GroupAddView.as_view()), name='groups_add'),
     url(r'^groups/(?P<pk>\d+)/edit/$', login_required(GroupUpdateView.as_view()), name='groups_edit'),
     url(r'^groups/(?P<pk>\d+)/delete/$', login_required(GroupDeleteView.as_view()), name='groups_delete'),
 
