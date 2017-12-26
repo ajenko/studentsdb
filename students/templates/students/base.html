@@ -1,8 +1,9 @@
 {% load i18n %}
 {% load static from staticfiles %}
 {% load nice_username %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="uk">
+<html{% if LANGUAGE_CODE == 'uk '%} lang="uk"{% else %} lang="en"{% endif %}>
 
   <head>
 	<meta charset="utf-8">
