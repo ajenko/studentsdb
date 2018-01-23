@@ -5,6 +5,8 @@ from django.conf import settings
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from studentsdb.settings import LANGUAGE_CODE
 
+from django.utils import translation
+from django.http import HttpResponse, HttpResponseRedirect
 
 def paginate(objects, size, request, context, var_name = 'object_list'):
 
@@ -76,27 +78,19 @@ def get_current_group(request):
 			return group
 	else:
 		return None
-
-def choose_lang(request):
-	if request.session[LANGUAGE_SESSION_KEY] == 'uk':
-		lg = u'Українська'
-		return lg
-	elif request.session[LANGUAGE_SESSION_KEY] == 'en':
-		lg = u'English'
-	else:
-		if LANGUAGE_CODE == 'uk':
-			lg = u'Українська'
-		elif LANGUAGE_CODE == 'en':
-			lg = u'English'
-		else:
-			lg = u'Select'
-		return lg 
-
+'''
+def choose_lang(request, user_language):
+	translation.activate(user_language)
+	request.session[translation.LANGUAGE_SESSION_KEY] = user_language
+	return None
 
 '''
+	
+'''
+
 def choose_lang(request):
 	""" Choose current app language """
-	lang = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME, 'uk-UK')
+	lang = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME, 'uk')
 	print 'Lang is:' + str(lang)
 	print 'lang is:' + str(settings.LANGUAGE_COOKIE_NAME)
 	response_dict = {'django_lang': ''}

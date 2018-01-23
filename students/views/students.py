@@ -20,6 +20,8 @@ from crispy_forms.layout import Submit
 from crispy_forms.bootstrap import FormActions
 import imghdr
 
+from django.contrib.auth.decorators import login_required
+from .dispatch_view import Dispatch
 # Create your views here.
 
 # Views for Students
@@ -47,7 +49,7 @@ def students_list(request):
 		var_name='students')
 		
 	return render(request, 'students/students_list.html', context)
-
+@login_required
 def students_add(request):
 	
 	# was form posted?
@@ -170,7 +172,7 @@ class StudentUpdateForm(ModelForm):
 			Submit('cancel_button', _(u'Cancel'), css_class = "btn btn-link")
 			))
 
-class StudentUpdateView(UpdateView):
+class StudentUpdateView(Dispatch, UpdateView):
 	model = Student
 	template_name = 'students/students_edit.html'
 	form_class = StudentUpdateForm
@@ -189,9 +191,11 @@ class StudentUpdateView(UpdateView):
 	
 
 
-class StudentDeleteView(DeleteView):
+class StudentDeleteView(Dispatch, DeleteView):
 	model = Student
 	template_name = 'students/students_confirm_delete.html'
 
 	def get_success_url(self):
 		return u'%s?status_message=%s' % (reverse('home'), _(u'The student deleted successfully!'))
+
+	

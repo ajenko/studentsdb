@@ -15,12 +15,14 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.template import RequestContext, loader	
 from django.views.generic.base import TemplateView
+
+from .dispatch_view import Dispatch
 # Create your views here.
 
 # Views for Journal 
 
 
-class JournalView(TemplateView):
+class JournalView(Dispatch, TemplateView):
 	template_name = 'students/journal.html'
 
 	def get_context_data(self, **kwargs):

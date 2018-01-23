@@ -10,7 +10,9 @@
 
 
 {% block content %}
+        {% if user.is_authenticated %}
   	    <a class="btn btn-primary" href="{% url "students_add" %}" id="student-add-form-link">{% trans "Add Student" %}</a>
+        {% endif %}
 
   	    <!-- Start Students Listing -->
 
@@ -43,7 +45,9 @@
               {% endif %}
             
               </a></th>
+              {% if user.is_authenticated %}
   	          <th>{% trans "Actions" %}</th>
+              {% endif %}
   	        </tr>
   	      </thead>
           {% endwith %}
@@ -60,12 +64,16 @@
               {% else %}  
               <img height="30" width="30" src="{% static "img/default_user.png" %}" class="img-circle">
               {% endif %}
-
-
               </td>
+              {% if user.is_authenticated %}
               <td><a title="{% trans "Edit" %}" href="{% url "students_edit" student.id %}" class="student-edit-form-link">{{ student.last_name }}</a></td>
   	          <td><a title="{% trans "Edit" %}" href="{% url "students_edit" student.id %}" class="student-edit-form-link">{{ student.first_name }}</a></td>
+              {% else %}
+              <td><p>{{ student.last_name }}</p></td>
+              <td><p>{{ student.first_name }}</p></td>
+              {% endif %}
   	          <td>{{ student.ticket }}</td>
+              {% if user.is_authenticated %}
   	          <td>
   	            <div class="dropdown">
   	            <button class="btn btn-default dropdown-toggle" 
@@ -88,6 +96,7 @@
   	              </ul>
   	            </div>
   	            </td>
+                {% endif %}
   	        </tr>
 
   	      </tbody>

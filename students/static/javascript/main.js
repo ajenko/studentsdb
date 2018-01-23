@@ -651,15 +651,25 @@ function initContactAdmin() {
 
 
 function setLang(){
-	$('#lang selector select').change(function(event){
-		alert("hi")
-		var language = $(this).val();
-		if (language) {
-			$.cookie('django_language', language, {'path': '/', 'expires': 365});
-		} else {
-			$.removeCookie('django_language', {'path': '/'});
-		}
-		location.reload(true);
+	$('.lang').change(function(event){
+		var lang = $(this);
+		$.ajax(lang.data('url'), {
+			'type': 'GET',
+			'async': true,
+			'dataType': 'json',
+			'beforeSend': function(xhr, setting) {
+
+			},
+			'error': function(xhr, status, error) {
+				alert('error');
+
+			},
+			'success': function(data, status, xhr) {
+				$.cookie(data.django_lang, lang.attr('value'), {'path': '/', 'expires': 365});
+				location.reload(true);
+			}
+
+		});
 		return true;
 	});
 
@@ -684,7 +694,7 @@ $(document).ready(function(){
 	initDeleteRating();
 	//initContactAdmin();
 
-	//setLang();
+	setLang();
 
 
 

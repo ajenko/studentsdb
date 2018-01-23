@@ -9,6 +9,7 @@ class Exam(models.Model):
 	class Meta(object):
 		verbose_name = _(u'Exam')
 		verbose_name_plural = _(u'Exams')
+		ordering = ['group']
 
 	subject = models.CharField(
 		max_length = 256,
