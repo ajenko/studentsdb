@@ -56,6 +56,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+    #'studentsdb.middleware.RequestTimeMiddleware',
+
 ]
 
 ROOT_URLCONF = 'studentsdb.urls'
@@ -143,9 +146,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 
 # Fixtures
 
-FIXTURE_DIRS = (
-   '/../fixtures/',
-)
+
 
 
 # email settings
@@ -215,9 +216,24 @@ LOGOUT_URL = 'users:auth_logout'
 
 # Social media authentication
 AUTHENTICATION_BACKENDS = (
+<<<<<<< HEAD
     'social.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     )
 
 SOCIAL_AUTH_FACEBOOK_KEY = ''
 SOCIAL_AUTH_FACEBOOK_SECRET = ''
+=======
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+     
+    )
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '3888060468-10v3nuvhm4pdf62s03l8rpb4mfpopc75.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '5gPaPsqZeLc95AevrPh3XPxL'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '2074046732814967'
+SOCIAL_AUTH_FACEBOOK_SECRET = '504cf62c1736ae35099eda30a851990f'
+>>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326

@@ -67,3 +67,29 @@ INFO 2017-09-11 15:53:28,273 signals: Student deleted: test 11111231 test 111112
 INFO 2017-09-11 16:02:31,446 signals: Group updated: 12 test212311231231 test2(ID: 17
 INFO 2017-09-11 16:05:49,384 signals: Group deleted: 12 test212311231231 test2(ID: 17)
 INFO 2017-09-11 18:46:32,984 signals: Student deleted: test212311231231 test2 (ID: 35)
+<<<<<<< HEAD
+=======
+INFO 2017-09-24 13:36:16,185 signals: Student added: Тестувальник Тестувальненко (ID: 34)
+INFO 2017-09-24 20:48:15,554 signals: Student added: first_name1452 last_name1649 (ID: 35)
+INFO 2017-09-24 20:49:01,178 signals: Student added: first_name7257 last_name8155 (ID: 36)
+INFO 2017-09-24 20:50:55,049 signals: Student added: first_name5419 last_name8129 (ID: 37)
+INFO 2017-09-24 20:50:55,072 signals: Group added: title5218 None(ID: 17
+INFO 2017-09-24 20:52:19,118 signals: Student added: first_name637 last_name3448 (ID: 38)
+INFO 2017-09-24 20:52:19,121 signals: Group added: title3653 None(ID: 18
+INFO 2017-09-24 20:59:08,855 signals: Student added: first_name7680 last_name8355 (ID: 39)
+INFO 2017-09-24 20:59:08,862 signals: Group added: title2319 None(ID: 19
+INFO 2017-09-24 21:08:22,156 signals: Student added: first_name1078 last_name1402 (ID: 40)
+INFO 2017-09-24 21:08:22,160 signals: Group added: title8706 None(ID: 20
+INFO 2017-09-24 21:08:22,164 signals: User added: username7728 email2398@example.com (ID: 9
+INFO 2017-09-24 21:09:15,153 signals: User updated: admin admin@admin.com (ID: 1)
+INFO 2017-09-24 21:11:34,220 signals: Group updated: title8706 first_name1078 last_name1402(ID: 20
+INFO 2017-09-24 21:11:53,020 signals: Group updated: title2319 first_name5419 last_name8129(ID: 19
+INFO 2017-09-24 21:11:53,030 signals: Group updated: title3653 first_name637 last_name3448(ID: 18
+INFO 2017-09-24 21:11:53,041 signals: Group updated: title5218 first_name1452 last_name1649(ID: 17
+INFO 2017-09-24 21:12:24,099 signals: Student updated: first_name1078 last_name1402 (ID: 40)
+INFO 2017-09-24 21:12:24,105 signals: Student updated: first_name1452 last_name1649 (ID: 35)
+INFO 2017-09-24 21:12:24,113 signals: Student updated: first_name637 last_name3448 (ID: 38)
+INFO 2017-09-24 21:12:24,118 signals: Student updated: first_name5419 last_name8129 (ID: 37)
+INFO 2017-09-24 21:12:24,122 signals: Student updated: first_name7257 last_name8155 (ID: 36)
+INFO 2017-09-24 21:12:24,128 signals: Student updated: first_name7680 last_name8355 (ID: 39)
+>>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326

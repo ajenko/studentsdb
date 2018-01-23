@@ -2,6 +2,7 @@
 {% load i18n %}
 
 {% load static from staticfiles %}
+{% load pagenav %}
 
 {% block meta_title %}{% trans "Accounting Service" %}{% endblock meta_title %}
 
@@ -82,9 +83,7 @@
       </table>
            {% endif %}
 
-      {% with object_list=students %}
-        {% include "students/pagination.html" %}
-      {% endwith %}
+      {% pagenav students is_paginated paginator %}
 
           {% endblock content %}
 

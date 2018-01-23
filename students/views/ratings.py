@@ -34,7 +34,7 @@ def ratings_list(request):
 		if request.GET.get('reverse', '') == '1':
 			ratings = ratings.reverse()
 
-	context = paginate(ratings, 100, request, {}, var_name='ratings')
+	context = paginate(ratings, 10, request, {}, var_name='ratings')
 	return render(request, 'students/ratings_list.html', context)
     		
 

@@ -692,7 +692,7 @@ $(document).ready(function(){
 	initAddRating();
 	initEditRating();
 	initDeleteRating();
-	//initContactAdmin();
+	initContactAdmin();
 
 	setLang();
 

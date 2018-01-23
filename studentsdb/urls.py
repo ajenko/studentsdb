@@ -29,13 +29,18 @@ from .settings import MEDIA_URL, MEDIA_ROOT, DEBUG
 from django.conf.urls.static import static
 from django.views.generic.base import RedirectView, TemplateView
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
+=======
+
+>>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326
 
 js_info_dict = {
     'packages': ('students', ), 
 }   
 
 urlpatterns = [
-	# Students urls
+
+    # Students urls
 	url(r'^$', students.students_list, name='home'), 
     url(r'^students/add/$', students.students_add, name='students_add'),
     url(r'^students/(?P<pk>\d+)/edit/$', StudentUpdateView.as_view(), name='students_edit'),
@@ -43,8 +48,13 @@ urlpatterns = [
     
     # Groups urls
     url(r'^groups/$', login_required(groups.groups_list), name='groups'),
+<<<<<<< HEAD
    # url(r'^groups/add/$', groups.groups_add, name='groups_add'),
    url(r'^groups/add/$', login_required(GroupAddView.as_view()), name='groups_add'),
+=======
+
+    url(r'^groups/add/$', login_required(GroupAddView.as_view()), name='groups_add'),
+>>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326
     url(r'^groups/(?P<pk>\d+)/edit/$', login_required(GroupUpdateView.as_view()), name='groups_edit'),
     url(r'^groups/(?P<pk>\d+)/delete/$', login_required(GroupDeleteView.as_view()), name='groups_delete'),
 
@@ -81,6 +91,9 @@ urlpatterns = [
     url(r'^users/logout/$', auth_views.logout, kwargs={'next_page': 'home'}, name='auth_logout'),
     url(r'^register/complete/$', RedirectView.as_view(pattern_name='home'), name='registration_complete'),
     url(r'^users/', include('registration.backends.simple.urls', namespace='users')),
+
+    # Social Auth Releted urls
+    url('^social/', include('social_django.urls', namespace='social'))
 ]
 
 
