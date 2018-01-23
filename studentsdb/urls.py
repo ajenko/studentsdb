@@ -29,7 +29,10 @@ from .settings import MEDIA_URL, MEDIA_ROOT, DEBUG
 from django.conf.urls.static import static
 from django.views.generic.base import RedirectView, TemplateView
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
+=======
 
+>>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326
 
 js_info_dict = {
     'packages': ('students', ), 
@@ -45,8 +48,13 @@ urlpatterns = [
     
     # Groups urls
     url(r'^groups/$', login_required(groups.groups_list), name='groups'),
+<<<<<<< HEAD
+   # url(r'^groups/add/$', groups.groups_add, name='groups_add'),
+   url(r'^groups/add/$', login_required(GroupAddView.as_view()), name='groups_add'),
+=======
 
     url(r'^groups/add/$', login_required(GroupAddView.as_view()), name='groups_add'),
+>>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326
     url(r'^groups/(?P<pk>\d+)/edit/$', login_required(GroupUpdateView.as_view()), name='groups_edit'),
     url(r'^groups/(?P<pk>\d+)/delete/$', login_required(GroupDeleteView.as_view()), name='groups_delete'),
 

@@ -86,7 +86,11 @@
 
         <!-- User`s toolbar for authenticated users -->
         <div class="col-xs-2" id="user-toolbar">
+<<<<<<< HEAD
+          <a href="{% url "profile" %}">{{ user.get_full_name|default:user.username }}</a> |
+=======
           <a href="{% url "profile" %}">{{ user|nice_username }}</a> |
+>>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326
           <a href="{% url "users:auth_logout" %}">{% trans "Logout"%}</a>
         </div>
 
@@ -94,9 +98,13 @@
 
         <!-- User`s toolbar for anonymous users -->
         <div class="col-xs-4" id="user-toolbar">
+<<<<<<< HEAD
+          <a href="{% url "users:auth_login" %}">{% trans "Login"%}</a> |
+=======
           <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">{% trans "via Facebook" %}</a> | 
           <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">{% trans "Google+" %}</a> |
           <a href="{% url "users:auth_login" %}">{% trans "Login" %}</a> |
+>>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326
           <a href="{% url "users:registration_register" %}">{% trans "Register"%}</a>
         </div>
         {% endif %}
