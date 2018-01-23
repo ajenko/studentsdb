@@ -1,6 +1,7 @@
 Django==1.11.2
 Pillow
-MySQL-python
 django-crispy-forms==1.6.1
 python-dateutil
 django-registration-redux==1.7
+social-auth-app-django
+MySQL-python
