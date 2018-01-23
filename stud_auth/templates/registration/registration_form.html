@@ -1,0 +1,57 @@
+{% extends "students/base.html" %}
+
+{% load i18n %}
+
+{% block meta_title %}{% trans "Register Form "%}{% endblock meta_title %}
+{% block title %}{% trans "Register Form" %}{% endblock title %}
+
+{% block status_message %}
+{% if form.errors %}
+<div class="alert alert-warning" role="alert">
+{% trans "Please, correct the following errors." %}
+{{ form.non_field_errors }} 
+</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container" id="main">
+<form action="{% url "users:registration_register" %}" method="post" class="form-horizontal" id="niz">
+
+{% csrf_token %}
+  <input type="hidden" name="next" value="{% url "home" %}">
+
+  <div class="form-group">
+    <label for="login" class="col-sm-2 control-label">{% trans "Your Username" %}</label>
+    <div class="col-sm-3">
+    <input type="text" name="username" class="form-control" id="login" value="">
+    <span class="help-block">{{ form.errors.username.as_text }}</span>
+    </div>	
+  </div>
+  <div class="form-group">
+    <label for="email" class="col-sm-2 control-label">{% trans "Your Email" %}</label>
+    <div class="col-sm-3">
+    <input type="email" name="email" class="form-control" id="email" value="">
+    <span class="help-block">{{ form.errors.email.as_text }}</span>	
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password" class="col-sm-2 control-label">{% trans "Your Password" %}</label>
+    <div class="col-sm-3">
+    <input type="password" name="password1" class="form-control" id="password" value="">
+    <span class="help-block">{{ form.errors.password1.as_text }}</span>  
+    </div>
+    </div>
+    <div class="form-group">
+    <label for="password-confirm" class="col-sm-2 control-label">{% trans "Confirm Password" %}</label>
+    <div class="col-sm-3">
+    <input type="password" name="password2" class="form-control" id="password-confirm" value="">
+    <span class="help-block">{{ form.errors.password2.as_text }}</span>  
+    </div>
+  </div>
+<div class="col-xs-12" id="buttons">
+<button type="submit" class="btn btn-primary">{% trans "Register" %}</button>
+	</div>
+</form>
+</div>
+{% endblock content %}
