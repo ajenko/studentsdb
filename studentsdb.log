@@ -1,0 +1,69 @@
+INFO 2017-09-01 12:34:32,723 signals: Student added: test test (ID: 43
+INFO 2017-09-01 12:35:09,105 signals: Student deleted: test test (ID: 43)
+INFO 2017-09-01 19:47:19,186 signals: Student added: test Дмитро (ID: 44)
+INFO 2017-09-01 19:47:58,405 signals: Student deleted: test Дмитро (ID: 44)
+INFO 2017-09-06 12:51:53,732 signals: Student added: test test (ID: 45)
+INFO 2017-09-07 11:30:35,604 signals: Student updated: Сергій Бойко (ID: 17)
+INFO 2017-09-07 17:05:15,557 signals: Student updated: test1 test (ID: 45)
+INFO 2017-09-07 17:13:22,338 signals: Student updated: test12 test1 (ID: 45)
+INFO 2017-09-07 17:24:05,384 signals: Student updated: test12 test1 (ID: 45)
+INFO 2017-09-07 17:39:12,786 signals: Student updated: test12 test1 (ID: 45)
+INFO 2017-09-07 17:39:26,886 signals: Student updated: test12 test1 (ID: 45)
+INFO 2017-09-07 17:40:00,143 signals: Student updated: test12 test1 (ID: 45)
+INFO 2017-09-07 17:56:16,630 signals: Student updated: test12 test1 (ID: 45)
+INFO 2017-09-07 17:56:40,541 signals: Student updated: Катерина Бондар (ID: 27)
+INFO 2017-09-07 18:00:17,797 signals: Student updated: test12434 test1 (ID: 45)
+INFO 2017-09-07 18:00:52,561 signals: Student added: test21231 test21231 (ID: 46)
+INFO 2017-09-07 18:01:42,409 signals: Student added: test2 test21231 (ID: 47)
+INFO 2017-09-07 18:03:37,607 signals: Student updated: test12434 test1 (ID: 45)
+INFO 2017-09-07 18:04:00,635 signals: Student added: Олександр test (ID: 48)
+INFO 2017-09-07 19:11:40,896 signals: Student deleted: test12434 test1 (ID: 45)
+INFO 2017-09-08 12:56:55,640 signals: Student updated: Андрій Кобрик (ID: 1)
+INFO 2017-09-08 12:57:29,472 signals: Student updated: Андрій Кобрик (ID: 1)
+INFO 2017-09-08 12:57:42,502 signals: Student updated: Андрій Кобрик (ID: 1)
+INFO 2017-09-08 13:13:19,368 signals: Student updated: Андрій Кобрик (ID: 1)
+INFO 2017-09-08 13:13:27,705 signals: Student updated: Андрій Кобрик (ID: 1)
+INFO 2017-09-08 13:15:11,283 signals: Student updated: Андрій Кобрик (ID: 1)
+INFO 2017-09-08 13:15:18,549 signals: Student updated: Андрій Кобрик (ID: 1)
+INFO 2017-09-08 13:21:23,500 signals: Student updated: Андрій Кобрик (ID: 1)
+INFO 2017-09-08 13:26:16,442 signals: Student updated: Андрій Кобрик (ID: 1)
+INFO 2017-09-08 13:26:23,253 signals: Student updated: Андрій Кобрик (ID: 1)
+INFO 2017-09-08 18:31:51,598 signals: Group added: newnew group test Едуард Петренко(ID: 23
+INFO 2017-09-08 18:32:09,817 signals: Student deleted: Олена Олійник (ID: 23)
+INFO 2017-09-08 19:05:08,153 signals: Group added: My First Blog Title Оксана Шевчук(ID: 11
+INFO 2017-09-08 19:05:15,922 signals: Group added: My First Blog Title1 Катерина Бондар(ID: 12
+INFO 2017-09-08 19:05:31,186 signals: Group added: newnew group test Максим Коваль(ID: 13
+INFO 2017-09-08 19:05:38,817 signals: Group added: newnew group test2 ВІктор Ткаченко(ID: 14
+INFO 2017-09-08 19:05:48,367 signals: Group added: newnew group test21 Ксенія Марченко(ID: 15
+INFO 2017-09-08 19:24:18,286 signals: Group added: My First Blog Title 121312 В'ячеслав Мороз(ID: 16
+INFO 2017-09-08 19:26:22,322 signals: Group added: My First Blog Title 121312 Олена Олійник(ID: 17
+INFO 2017-09-08 19:27:01,709 signals: Group added: My First Blog Title 121312 Едуард Петренко(ID: 18
+INFO 2017-09-08 19:28:01,493 signals: Group added: My First Blog Title Дмитро Поліщук(ID: 19
+INFO 2017-09-08 19:28:40,777 signals: Group deleted: My First Blog Title Дмитро Поліщук(ID: 19)
+INFO 2017-09-08 19:28:45,247 signals: Group deleted: My First Blog Title 121312 Едуард Петренко(ID: 18)
+INFO 2017-09-08 19:28:49,021 signals: Group deleted: My First Blog Title 121312 Олена Олійник(ID: 17)
+INFO 2017-09-08 19:28:53,823 signals: Group deleted: My First Blog Title 121312 В'ячеслав Мороз(ID: 16)
+INFO 2017-09-08 19:29:22,632 signals: Exam deleted: SQL DFG-6 (ID: 24)
+INFO 2017-09-08 19:36:08,350 signals: Rating updated: Андрій Кобрик Django (ID: 9)
+INFO 2017-09-08 19:36:52,098 signals: Rating added: Оксана Шевчук Git (ID: 30)
+INFO 2017-09-08 19:36:58,085 signals: Rating deleted: Оксана Шевчук Git (ID: 30)
+INFO 2017-09-09 11:49:12,280 signals: Student updated: Сергій Бойко (ID: 17)
+INFO 2017-09-09 11:56:47,840 signals: Rating updated: Сергій Бойко HTML (ID: 8)
+INFO 2017-09-11 13:51:04,445 signals: Exam added: Git ABC-1 (ID: 24)
+INFO 2017-09-11 13:52:00,090 signals: Exam added: Git ABC-1 (ID: 25)
+INFO 2017-09-11 13:52:35,800 signals: Exam added: Git ABD-2 (ID: 26)
+INFO 2017-09-11 13:53:15,212 signals: Exam added: Git ABC-1 (ID: 27)
+INFO 2017-09-11 13:54:58,806 signals: Group added: 1 Іван Ткачук(ID: 16
+INFO 2017-09-11 13:57:13,475 signals: Student added: test 11111231 test 11111231 (ID: 34)
+INFO 2017-09-11 13:58:23,404 signals: Student added: test212311231231 test2 (ID: 35)
+INFO 2017-09-11 13:58:37,839 signals: Group added: 12 test 11111231 test 11111231(ID: 17
+INFO 2017-09-11 15:52:02,566 signals: Group updated: DBC-12 Оксана Шевчук(ID: 11
+INFO 2017-09-11 15:52:16,079 signals: Group updated: DDE-18 Катерина Бондар(ID: 12
+INFO 2017-09-11 15:52:31,245 signals: Group updated: CBE-25 Максим Коваль(ID: 13
+INFO 2017-09-11 15:52:42,093 signals: Group updated: EEF-35 ВІктор Ткаченко(ID: 14
+INFO 2017-09-11 15:53:04,195 signals: Group updated: ARO-15 Ксенія Марченко(ID: 15
+INFO 2017-09-11 15:53:19,282 signals: Group updated: OOP-10 Іван Ткачук(ID: 16
+INFO 2017-09-11 15:53:28,273 signals: Student deleted: test 11111231 test 11111231 (ID: 34)
+INFO 2017-09-11 16:02:31,446 signals: Group updated: 12 test212311231231 test2(ID: 17
+INFO 2017-09-11 16:05:49,384 signals: Group deleted: 12 test212311231231 test2(ID: 17)
+INFO 2017-09-11 18:46:32,984 signals: Student deleted: test212311231231 test2 (ID: 35)
