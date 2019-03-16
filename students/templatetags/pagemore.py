@@ -9,6 +9,7 @@ from django.utils import timezone
 
 register = template.Library()
 
+
 class PaginationStrategy(object):
     FILTER = 'filter'
     SLICE = 'slice'
@@ -57,16 +58,15 @@ class FilteringPaginator(BasePaginator):
         after_val = self.request.GET.get(self.GET_PARAM)
         objects = self.objects
         if after_val is not None:
-            field_type = self.objects.model \
-            ._meta.get_field(self.order_field)
+            field_type = self.objects.model._meta.get_field(self.order_field)
             if isinstance(field_type, DateTimeField):
                 after_val = timezone.make_aware(
                     datetime.utcfromtimestamp(int(after_val)),
                     timezone.utc
                 )
             order_q = self.order_field + '__' + self.order_op
-            objects = objects.filter(**{order_q: after_val} )
-        objects = list(objects[0:self.per_page+1]) # evaluate qs, intentionally
+            objects = objects.filter(**{order_q: after_val})
+        objects = list(objects[0:self.per_page+1])  # evaluate qs, intentionally
         next_after_val = None
         if len(objects) > self.per_page:
             next_after_val = getattr(objects[-2], self.order_field)
@@ -77,7 +77,7 @@ class FilteringPaginator(BasePaginator):
         else:
             next_after_val = None
         return objects, next_after_val
-    
+
 
 class SlicingPaginator(BasePaginator):
     GET_PARAM = 'pagemore_page'
@@ -93,7 +93,6 @@ class SlicingPaginator(BasePaginator):
                                                per_page,
                                                ordered_by)
 
-
     def get_page(self):
         try:
             page = int(self.request.GET.get(self.GET_PARAM, 1))
@@ -105,7 +104,7 @@ class SlicingPaginator(BasePaginator):
         page = self.get_page()
         page0 = self.get_page() - 1
         objects = self.objects[page0*self.per_page:1+page*self.per_page]
-        objects = list(objects) # evaluate qs, intentionally
+        objects = list(objects)  # evaluate qs, intentionally
         next_page = None
         if len(objects) > self.per_page:
             next_page = page + 1
@@ -122,12 +121,12 @@ def more_paginator(context, objects, per_page=None, ordered_by=None,
     if objects is None or objects == '' or objects == []:
         paginator = SlicingPaginator(request, [], None, None)
     else:
-        paginator_klazz = { 
+        paginator_klazz = {
             PaginationStrategy.FILTER: FilteringPaginator,
-            PaginationStrategy.SLICE: SlicingPaginator }[strategy]
-        paginator = paginator_klazz(request, 
-                                    objects, 
+            PaginationStrategy.SLICE: SlicingPaginator
+            }[strategy]
+        paginator = paginator_klazz(request,
+                                    objects,
                                     per_page=per_page,
                                     ordered_by=ordered_by)
     return paginator.get_context_data()
-

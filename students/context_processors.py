@@ -1,5 +1,5 @@
-from .util import get_groups 
+from .util import get_groups
+
 
 def groups_processor(request):
-	return {'GROUPS': get_groups(request)}
-	
+    return {'GROUPS': get_groups(request)}

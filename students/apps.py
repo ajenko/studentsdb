@@ -8,4 +8,4 @@ class StudentsAppConfig(AppConfig):
     verbose_name = _(u'Students Base')
 
     def ready(self):
-    	from students import signals
+        from students import signals  # noqa

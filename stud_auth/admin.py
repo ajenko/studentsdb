@@ -3,11 +3,14 @@ from django.contrib.auth import admin as auth_admin
 from django.contrib.auth.models import User
 from .models import StProfile
 
+
 class StProfileInline(admin.StackedInline):
-	model = StProfile
+    model = StProfile
+
 
 class UserAdmin(auth_admin.UserAdmin):
-	inlines = (StProfileInline,)
+    inlines = (StProfileInline,)
+
 
 # replace existing User admin form
 admin.site.unregister(User)

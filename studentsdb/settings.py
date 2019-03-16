@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from .db import DATABASES
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,7 +43,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'students',
     'stud_auth',
-    
 
 ]
 
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
-    #'studentsdb.middleware.RequestTimeMiddleware',
+    'studentsdb.middleware.RequestTimeMiddleware',
 
 ]
 
@@ -76,7 +76,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
-		        'students.context_processors.groups_processor',
+                'students.context_processors.groups_processor',
                 'studentsdb.context_processors.students_proc',
             ],
         },
@@ -88,8 +88,6 @@ WSGI_APPLICATION = 'studentsdb.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-from .db import DATABASES
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -129,8 +127,6 @@ LANGUAGES = (
     ('en', u'English'),
     ('uk', u'Ukrainian'),
     )
-    
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -144,12 +140,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
 
 
-# Fixtures
-
-
-
-
-# email settings
+# Email settings
 
 ADMIN_EMAIL = 'admin@studentsdb.com'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -216,24 +207,10 @@ LOGOUT_URL = 'users:auth_logout'
 
 # Social media authentication
 AUTHENTICATION_BACKENDS = (
-<<<<<<< HEAD
     'social.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     )
 
 SOCIAL_AUTH_FACEBOOK_KEY = ''
 SOCIAL_AUTH_FACEBOOK_SECRET = ''
-=======
-    'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.google.GoogleOAuth2',
-
-    'django.contrib.auth.backends.ModelBackend',
-     
-    )
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '3888060468-10v3nuvhm4pdf62s03l8rpb4mfpopc75.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '5gPaPsqZeLc95AevrPh3XPxL'
-
-SOCIAL_AUTH_FACEBOOK_KEY = '2074046732814967'
-SOCIAL_AUTH_FACEBOOK_SECRET = '504cf62c1736ae35099eda30a851990f'
->>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326

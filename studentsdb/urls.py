@@ -13,52 +13,43 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-#from students.views.ratings import ratings_ajax_next_page
+
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 from django.views.i18n import javascript_catalog
+from django.conf.urls.static import static
+from django.views.generic.base import RedirectView, TemplateView
+
+
 from students.views import students, groups, journal, exams, ratings, contact_admin
 from students.views.students import StudentUpdateView, StudentDeleteView
 from students.views.groups import GroupUpdateView, GroupDeleteView, GroupAddView
 from students.views.exams import ExamUpdateView, ExamDeleteView
 from students.views.ratings import RatingUpdateView, RatingDeleteView
 from students.views.journal import JournalView
-#from students.util import choose_lang
 from .settings import MEDIA_URL, MEDIA_ROOT, DEBUG
-from django.conf.urls.static import static
-from django.views.generic.base import RedirectView, TemplateView
-from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
-=======
 
->>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326
 
 js_info_dict = {
-    'packages': ('students', ), 
-}   
+    'packages': ('students', ),
+}
 
 urlpatterns = [
 
     # Students urls
-	url(r'^$', students.students_list, name='home'), 
+    url(r'^$', students.students_list, name='home'),
     url(r'^students/add/$', students.students_add, name='students_add'),
     url(r'^students/(?P<pk>\d+)/edit/$', StudentUpdateView.as_view(), name='students_edit'),
     url(r'^students/(?P<pk>\d+)/delete/$', StudentDeleteView.as_view(), name='students_delete'),
-    
+
     # Groups urls
     url(r'^groups/$', login_required(groups.groups_list), name='groups'),
-<<<<<<< HEAD
-   # url(r'^groups/add/$', groups.groups_add, name='groups_add'),
-   url(r'^groups/add/$', login_required(GroupAddView.as_view()), name='groups_add'),
-=======
-
-    url(r'^groups/add/$', login_required(GroupAddView.as_view()), name='groups_add'),
->>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326
     url(r'^groups/(?P<pk>\d+)/edit/$', login_required(GroupUpdateView.as_view()), name='groups_edit'),
     url(r'^groups/(?P<pk>\d+)/delete/$', login_required(GroupDeleteView.as_view()), name='groups_delete'),
 
-    #Journal urls
+    # Journal urls
     url(r'^journal/(?P<pk>\d+)?/?$', JournalView.as_view(), name='journal'),
 
     # Exams urls
@@ -72,9 +63,8 @@ urlpatterns = [
     url(r'^ratings/add/$', login_required(ratings.ratings_add), name='ratings_add'),
     url(r'^ratings/(?P<pk>\d+)/edit/$', login_required(RatingUpdateView.as_view()), name='ratings_edit'),
     url(r'^ratings/(?P<pk>\d+)/delete/$', login_required(RatingDeleteView.as_view()), name='ratings_delete'),
-   # url(r'ratings/next_page$', ratings.ratings_ajax_next_page, name ='ratings_next_page'),
-
-	url(r'^admin/', admin.site.urls),
+    # url(r'ratings/next_page$', ratings.ratings_ajax_next_page, name ='ratings_next_page'),
+    url(r'^admin/', admin.site.urls),
 
     # Contact admin Form
     url(r'^contact-admin/$', contact_admin.contact_admin, name='contact_admin'),
@@ -83,7 +73,7 @@ urlpatterns = [
     url(r'^jsi18n\.js$', javascript_catalog, js_info_dict, name='javascript_catalog'),
 
     # Choose Lang 
-   # url(r'^set_language/(?P<user_language>\w+)/$', choose_lang, name='choose_lang'),
+    # url(r'^set_language/(?P<user_language>\w+)/$', choose_lang, name='choose_lang'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
     # User Releted urls

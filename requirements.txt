@@ -3,9 +3,5 @@ Pillow
 django-crispy-forms==1.6.1
 python-dateutil
 django-registration-redux==1.7
-<<<<<<< HEAD
-social-auth-app-django
 MySQL-python
-=======
 python-social-auth==0.2.14
->>>>>>> c75d482487ee6b729c180df2cb135b450fbe0326

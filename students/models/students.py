@@ -4,53 +4,62 @@ from django.db import models
 
 
 class Student(models.Model):
-	""" Students model """
+    """ Students model """
 
-	class Meta(object):
-		verbose_name = _(u"Student")
-		verbose_name_plural = _(u"Students")
-		ordering = ['last_name']
+    first_name = models.CharField(
+        max_length=256,
+        blank=False,
+        verbose_name=_(u"Last Name")
+        )
 
-	first_name = models.CharField(
-		max_length = 256,
-		blank = False,
-		verbose_name = _(u"Last Name"))
+    last_name = models.CharField(
+        max_length=256,
+        blank=False,
+        verbose_name=_(u"First Name")
+        )
 
-	last_name = models.CharField(
-		max_length = 256, 
-		blank = False, 
-		verbose_name = _(u"First Name"))
+    middle_name = models.CharField(
+        max_length=256,
+        blank=True,
+        verbose_name=_(u"Middle Name"),
+        default=''
+        )
 
-	middle_name = models.CharField(
-		max_length = 256,
-		blank = True,
-		verbose_name = _(u"Middle Name"),
-		default='')
+    birthday = models.DateField(
+        blank=False,
+        verbose_name=_(u"Date of birthday"),
+        null=True
+        )
 
-	birthday = models.DateField(	
-		blank = False,
-		verbose_name = _(u"Date of birthday"),
-		null = True)
+    photo = models.ImageField(
+        blank=True,
+        verbose_name=_(u"Photo"),
+        null=True
+        )
 
-	photo = models.ImageField(
-		blank = True,
-		verbose_name = _(u"Photo"),
-		null = True)
-		
-	ticket = models.CharField(
-		max_length = 4,
-		blank = False,
-		verbose_name = _(u"Ticket"))
+    ticket = models.CharField(
+        max_length=4,
+        blank=False,
+        verbose_name=_(u"Ticket")
+        )
 
-	notes = models.TextField(
-		blank = True, 
-		verbose_name = _(u"Notes"))
-	
-	students_group = models.ForeignKey('Group',
-		verbose_name = _(u'Group'),
-		blank = False,
-		null = True,
-		on_delete = models.PROTECT)
-	
-	def __unicode__(self):
-		return u"%s %s" % (self.first_name, self.last_name)
+    notes = models.TextField(
+        blank=True,
+        verbose_name=_(u"Notes")
+        )
+
+    students_group = models.ForeignKey(
+        'Group',
+        verbose_name=_(u'Group'),
+        blank=False,
+        null=True,
+        on_delete=models.PROTECT
+        )
+
+    class Meta(object):
+        verbose_name = _(u"Student")
+        verbose_name_plural = _(u"Students")
+        ordering = ['last_name']
+
+    def __unicode__(self):
+        return u"%s %s" % (self.first_name, self.last_name)
